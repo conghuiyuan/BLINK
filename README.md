@@ -33,3 +33,13 @@ npm run dev -- --port 5173 --strictPort
 - 静态图片已下载并内嵌，不需要课堂联网获取图片。来源与署名见 [src/assets/SOURCES.md](src/assets/SOURCES.md)。
 - 云端托管浏览器禁止 file:// 导航。单文件可通过返回其原始 HTML 字节并阻断全部外部资源请求来验证；普通桌面浏览器可直接打开文件。
 - 课件适合电脑横屏演示；小尺寸设备按整屏缩放，建议使用横屏或电脑获得清晰阅读效果。
+
+## 下载与 GitHub Pages
+
+[下载离线课件 ZIP](https://github.com/conghuiyuan/BLINK/raw/refs/heads/main/docs/zaojing-classroom.zip)。解压后，用支持 WebGL 2 的浏览器打开 `zaojing-classroom.html`。
+
+`docs/index.html` 是可以直接发布的完整网页；`docs/zaojing-classroom.zip` 是配套离线包。
+
+首次启用 GitHub Pages 时，打开仓库 **Settings → Pages**，Source 选择 **Deploy from a branch**，Branch 选择 **main**，目录选择 **/docs**，点击 **Save**。GitHub 会开始构建和发布。这里的说明不代表站点已上线，请以 Pages 设置页报告的发布结果为准。
+
+仓库也提供手动工作流 `.github/workflows/publish-classroom.yml`，用于已启用 GitHub Actions 作为 Pages 发布来源的环境。默认 `GITHUB_TOKEN` 不能首次启用 Pages；不要把令牌值写入工作流或源码。
