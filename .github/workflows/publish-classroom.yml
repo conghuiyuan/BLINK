@@ -1,0 +1,43 @@
+name: Publish classroom to GitHub Pages
+
+# Manual publication only. Adding this file does not publish the classroom.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npm run build
+      - name: Package portable classroom and download
+        shell: bash
+        run: |
+          mkdir -p dist/pages
+          cp dist/zaojing-classroom.html dist/pages/index.html
+          cp dist/zaojing-classroom.html dist/pages/zaojing-classroom.html
+          python3 -m zipfile -c dist/pages/zaojing-classroom.zip dist/zaojing-classroom.html
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/pages
+      - name: Publish
+        id: deployment
+        uses: actions/deploy-pages@v4
