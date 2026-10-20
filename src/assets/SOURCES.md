@@ -15,7 +15,23 @@
 - 案例介绍页使用官方预览图；观看重点页仅保留文字。入口教学、信息区域、视觉引导与操作反馈需结合原站演示，不据此预览图推断具体操作。
 - 历史素材 `bruno-2019.png` 保留在仓库中，本版课件未引用；来源：<https://raw.githubusercontent.com/brunosimon/folio-2019/master/static/social/share-1200x630.png>。
 
-## 光·遇（Sky: Children of the Light）
+## 用户提供的游戏视觉参考 PPT
+
+- 来源：用户上传的 `游戏视觉部分参考.pptx`，课件采用其中的文字结构与七张图片。
+- 《光·遇》（thatgamecompany）：`sky-campfire.jpg`、`sky-islands.jpg`、`sky-materials.jpg`、`sky-lighting.jpg`、`sky-guidance.jpg`，分别对应原 PPT 的 image1、image4、image5、image6、image7。
+- 《风之旅人》（thatgamecompany）：`journey-bridge.jpg`，对应 image2。
+- A Short Hike（Adam Robinson-Yu）：`short-hike-forest.jpg`，对应 image3。
+- 图片直接从用户的 PPT 中提取，作为教学案例引用，保留原游戏画面与已有界面元素。原 PPT 未提供这些截图的独立来源链接，不另作推断。
+- 最后一页内容以用户在聊天中明确指定的文字为准，后接原课件的视觉规则页。
+
+## 唤醒花园概念场景图
+
+- 文件：`garden-concept.webp`。
+- 根据本课件的空间设计，使用 OpenAI 图像生成工具制作，用于布局图与概念图的对照教学。不是现有游戏截图，也不是三维场景的实时渲染。
+- 保留南侧入口、中央花坛、左侧 A、右侧 B、后方 C 三个供水装置与相通步道。背景植物、材质与日光表达概念阶段的视觉氛围。
+- 原始生成图保留在工作区的 `generated_images` 中；网页使用 WebP 格式以减少离线文件体积。
+
+## 历史素材：光·遇（本版未引用）
 
 - 游戏与画面：thatgamecompany。
 - 文件：`sky-day.webp`、`sky-night.webp`。
@@ -23,9 +39,9 @@
 - 原始图像：<https://raw.githubusercontent.com/PlutoyDev/sky-shards/production/public/backgrounds/SkyBackgroundLight.webp>
 - 原始图像：<https://raw.githubusercontent.com/PlutoyDev/sky-shards/production/public/backgrounds/SkyBackgroundDark.webp>
 - 来源项目：<https://github.com/PlutoyDev/sky-shards>
-- 课件中直接展示这两张图片，不提供游戏下载或网站跳转链接。
+- 这两张历史素材保留在仓库，本版游戏视觉使用上方列出的用户 PPT 图片，不提供游戏下载链接。
 
-## Veloren
+## 历史素材：Veloren（本版未引用）
 
 - 作品及图片：Veloren contributors。
 - 文件：`veloren.jpg`、`veloren-extra.jpg`。

@@ -8,7 +8,7 @@ const app = document.querySelector('#app');
 const iconPaths={cube:'<path d="m12 3 9 5v8l-9 5-9-5V8zM3 8l9 5 9-5M12 13v8"/>',screen:'<rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8m-4-4v4"/>',expand:'<path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/>',menu:'<path d="M4 6h16M4 12h16M4 18h16"/>',note:'<path d="M5 3h14v18H5zM8 8h8M8 12h8M8 16h5"/>',arrow:'<path d="M5 12h14m-5-5 5 5-5 5"/>'};
 const icon = name => `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${iconPaths[name]||iconPaths.cube}</svg>`;
 let page=readHash(),presentation=false,world=null,fitObserver=null;
-let demoMode=0,activePumps=new Set(),layoutStep=1,nightStyle=false,skyNight=false,skyFocus=0,pairFocus='focus';
+let demoMode=0,activePumps=new Set(),layoutStep=1,nightStyle=false,skyFocus=0,pairFocus='focus';
 let promptLayers=new Set([0]);
 
 function readHash(){
@@ -72,20 +72,25 @@ function renderStyle(){
   document.querySelector('.slide-body').innerHTML=`<section class="style-presentation"><div class="segmented"><button class="${!nightStyle?'active':''}" data-style="light" aria-pressed="${!nightStyle}">☀ 明亮 · 圆润 · 轻松</button><button class="${nightStyle?'active':''}" data-style="night" aria-pressed="${nightStyle}">☾ 深邃 · 棱角 · 神秘</button></div><div class="style-scene ${nightStyle?'night':''}"><div class="illustration">${garden({awake:true,night:nightStyle})}</div><div><span class="eyebrow">SAME WORLD, DIFFERENT MOOD</span><h2>${nightStyle?'同一空间，<br>另一种情绪。':'让视觉，<br>成为共同的语言。'}</h2><p>${nightStyle?'棱角分明的树木、冷色环境、浅紫色装置。':'圆润简化的形体、浅绿色环境、暖黄色装置。'}</p><div class="swatches">${(nightStyle?['#394a60','#827698','#c6c4e7']:['#b8cba4','#f1d584','#f5ebcf']).map(c=>`<i style="background:${c}"></i>`).join('')}</div><p class="style-question">哪些变化改变了感受？<br>哪些线索帮助你识别同一个世界？</p></div></div></section>`;
 }
 const skyAnalyses=[
-  ['色彩','大面积颜色，建立整体情绪。','日景的蓝白色让空间轻盈开阔；夜景的蓝紫色让空间安静、神秘。重点颜色不需要平均分布。'],
-  ['光照','明暗关系，让目标被看见。','山顶的明亮区域与周围环境形成反差，视线更容易停留在那里。光照同时表达氛围与重要性。'],
-  ['空间层次','云层与山体，构成远近关系。','近处云层、中间山体、远处天空形成前后层次。大片天空与山体的关系，带来开阔的空间感。'],
-  ['视觉引导','让人想去的地方，先变得醒目。','轮廓、亮点与斜向山体把视线带到山顶。把这种方法带回花园：让重要节点容易被发现。'],
+  ['造型','概括轮廓，让角色与世界相互呼应。','角色披风、山体与植被都使用简化的形体。看角色与岛屿的大小关系，也能感受这个世界的尺度。'],
+  ['光照','柔和明暗，让空间轻盈、开阔。','受光的山体与云层较明亮，背光处保留层次。明暗关系既建立氛围，也帮助我们看清地形。'],
+  ['空间层次','前景、中景与远景，形成探索的深度。','近处是正在飞行的角色，中间是可以靠近的主岛，远处是被云层围绕的浮岛。前后层次让人想继续前进。'],
 ];
 function renderSky(){
   const [name,title,text]=skyAnalyses[skyFocus];
-  document.querySelector('.slide-body').innerHTML=`<div class="sky-presentation"><div class="sky-picture"><div class="sky-image-wrap"><img src="${skyNight?images.skyNight:images.skyDay}" alt="光遇${skyNight?'夜景：星空与明亮山顶':'日景：云海与明亮山顶'}">${skyFocus===1||skyFocus===3?`<span class="focus-ring" style="left:${skyNight?76:29}%;top:${skyNight?27:24}%"><b>视觉焦点</b></span>`:''}${skyFocus===2?'<span class="depth-label near">前景 · 云层</span><span class="depth-label middle">中景 · 山体</span><span class="depth-label far">远景 · 天空</span>':''}</div><div class="photo-controls"><div class="segmented"><button data-sky="day" class="${!skyNight?'active':''}" aria-pressed="${!skyNight}">日景</button><button data-sky="night" class="${skyNight?'active':''}" aria-pressed="${skyNight}">夜景</button></div><span>《光·遇》· thatgamecompany / Sky Shards 社区图片</span></div></div><aside><div class="analysis-tabs">${skyAnalyses.map(([n],i)=>`<button data-sky-focus="${i}" class="${skyFocus===i?'active':''}" aria-pressed="${skyFocus===i}">0${i+1}　${n}</button>`).join('')}</div><span class="eyebrow">${name} · VISUAL ANALYSIS</span><h2>${title}</h2><p>${text}</p></aside></div>`;
+  document.querySelector('.slide-body').innerHTML=`<div class="sky-presentation"><div class="sky-picture"><div class="sky-image-wrap"><img src="${images.skyIslands}" alt="光遇：前景飞行角色、中景山体与远处浮岛，来自参考 PPT">${skyFocus===0?'<span class="focus-ring" style="left:48%;top:62%"><b>角色与环境的形体</b></span>':skyFocus===1?'<span class="focus-ring" style="left:71%;top:30%"><b>山体受光面</b></span>':'<span class="depth-label near">前景 · 角色</span><span class="depth-label middle">中景 · 主岛</span><span class="depth-label far">远景 · 浮岛</span>'}</div><p class="source">《光·遇》· 用户提供 PPT 参考图</p></div><aside><div class="analysis-tabs" role="group" aria-label="光遇视觉解析角度">${skyAnalyses.map(([n],i)=>`<button data-sky-focus="${i}" class="${skyFocus===i?'active':''}" aria-pressed="${skyFocus===i}">0${i+1}　${n}</button>`).join('')}</div><span class="eyebrow">${name} · VISUAL ANALYSIS</span><h2>${title}</h2><p>${text}</p></aside></div>`;
 }
-const pairPositions={entrance:[[50,87],[49,81]],focus:[[50,52],[49,62]],A:[[24,52],[31,54]],B:[[76,52],[68,54]],C:[[50,23],[50,38]]};
+const pairPositions={entrance:[[50,87],[50,79]],focus:[[50,52],[50,45]],A:[[24,52],[23,39]],B:[[76,52],[78,39]],C:[[50,23],[50,21]]};
+function conceptArtwork(focus=null){
+  const names={entrance:'入口',focus:'中央花坛',A:'装置 A',B:'装置 B',C:'装置 C'};
+  const position=focus?pairPositions[focus][1]:null;
+  const x=position?.[0]*1536/100,y=position?.[1]*1024/100;
+  return `<svg class="concept-artwork" viewBox="0 0 1536 1024" role="img" aria-label="唤醒花园概念场景图：入口、中央花坛、左右和后方的三个供水装置，以及清楚的步道、植物和日光"><image href="${images.gardenConcept}" width="1536" height="1024"/>${focus?`<g data-pair-marker="${focus}"><circle cx="${x}" cy="${y}" r="${focus==='focus'?90:65}" fill="#efd881" fill-opacity=".08" stroke="#ffffed" stroke-width="7"/><circle cx="${x}" cy="${y}" r="${focus==='focus'?90:65}" fill="none" stroke="#9b7d35" stroke-width="3"/><rect x="${x-78}" y="${y+76}" width="156" height="42" rx="12" fill="#f5f8ef" fill-opacity=".95"/><text x="${x}" y="${y+105}" text-anchor="middle" fill="#365941" font-size="27" font-family="sans-serif">${names[focus]}</text></g>`:''}</svg>`;
+}
 function renderCompare(){
   const names={entrance:'入口',focus:'中央花坛',A:'装置 A',B:'装置 B',C:'装置 C'},positions=pairPositions[pairFocus];
   const marked=(svg,xy,w,h)=>svg.replace('</svg>',`<circle data-pair-marker="${pairFocus}" cx="${xy[0]*w/100}" cy="${xy[1]*h/100}" r="25" fill="#efd881" fill-opacity=".16" stroke="#b99138" stroke-width="3"/></svg>`);
-  document.querySelector('.slide-body').innerHTML=`<div class="correspondence-buttons" role="group" aria-label="对应布局图与概念图">${Object.entries(names).map(([id,t])=>`<button class="${id===pairFocus?'active':''}" data-pair="${id}" aria-pressed="${id===pairFocus}">${t}</button>`).join('')}</div><div class="comparison"><div><span class="eyebrow">PLAN · 位置、连接、路线与节点</span><div class="paired-art">${marked(planSvg(5),positions[0],560,370)}</div><p>空间布局图：放在哪里，怎样过去？</p></div><div><span class="eyebrow">CONCEPT · 造型、色彩、光照与氛围</span><div class="paired-art">${marked(garden({awake:true,labels:true}),positions[1],650,430)}</div><p>概念场景图：长什么样，是什么感受？</p></div></div><p class="source">当前对应：${names[pairFocus]}。两幅图为课堂示意，展示同一套空间与节点关系。</p>`;
+  document.querySelector('.slide-body').innerHTML=`<div class="correspondence-buttons" role="group" aria-label="对应布局图与概念图">${Object.entries(names).map(([id,t])=>`<button class="${id===pairFocus?'active':''}" data-pair="${id}" aria-pressed="${id===pairFocus}">${t}</button>`).join('')}</div><div class="comparison"><div><span class="eyebrow">PLAN · 位置、连接、路线与节点</span><div class="paired-art">${marked(planSvg(5),positions[0],560,370)}</div><p>空间布局图：放在哪里，怎样过去？</p></div><div class="concept-panel"><span class="eyebrow">CONCEPT · 造型、色彩、光照与氛围</span><div class="paired-art">${conceptArtwork(pairFocus)}</div><p>概念场景图：长什么样，是什么感受？</p></div></div><p class="source">当前对应：${names[pairFocus]}。入口、中央花坛与三个装置相互对应，两张图描述同一个世界。</p>`;
 }
 function renderPrompt(){
   document.querySelector('.slide-body').innerHTML=`<div class="prompt-layout"><div class="prompt-instructions"><span class="eyebrow">DESIGN → PROMPT</span><h2>不是只说“画一个花园”，<br>而是把设计说清楚。</h2><div class="prompt-layers" role="group" aria-label="提示词信息层">${promptParts.map(([t],i)=>`<button class="${promptLayers.has(i)?'active':''}" data-layer="${i}" aria-pressed="${promptLayers.has(i)}"><span>0${i+1}</span>${t}<b>${promptLayers.has(i)?'✓':'+'}</b></button>`).join('')}</div><p class="source">点击信息层，逐步完善提示词。<br>本课件不直接调用 AI 生图服务。</p></div><div class="prompt-panel"><span class="eyebrow">PROMPT PREVIEW</span><div class="prompt-preview" role="status">${promptParts.map(([,t],i)=>promptLayers.has(i)?`<p class="layer-${i}">${t}</p>`:'').join('')||'<p class="empty-prompt">请打开左侧的信息层。</p>'}</div><button class="button dark" data-action="copy-prompt" ${promptLayers.size?'':'disabled'}>复制当前提示词 ↗</button></div></div>`;
@@ -110,9 +115,9 @@ function printHandout(){
 function printDemo(kind){
   if(kind==='home')return garden({awake:true});
   if(kind==='layout-demo')return planSvg(5)+layoutSteps.map(([t,p],i)=>`<p>${i+1}. ${t}：${p}</p>`).join('');
-  if(kind==='sky-analysis')return `<img src="${images.skyDay}" alt="光遇日景"><img src="${images.skyNight}" alt="光遇夜景">`+skyAnalyses.map(([t,h,p])=>`<p><b>${t}：${h}</b>${p}</p>`).join('');
+  if(kind==='sky-analysis')return `<img src="${images.skyIslands}" alt="光遇：角色与浮岛">`+skyAnalyses.map(([t,h,p])=>`<p><b>${t}：${h}</b>${p}</p>`).join('');
   if(kind==='prompt-demo')return promptParts.map(([t,p])=>`<p><b>${t}</b>：${p}</p>`).join('');
-  if(kind==='concept-compare')return planSvg(5)+garden({awake:true,labels:true});
+  if(kind==='concept-compare')return planSvg(5)+conceptArtwork();
   if(kind==='style-demo')return garden({awake:true})+garden({awake:true,night:true});
   return garden({awake:true,labels:true})+'<p>网页版可拖动真实 3D 花园，并点击供水装置观察反馈。</p>';
 }
@@ -122,7 +127,6 @@ app.addEventListener('click',async e=>{
   const rotate=e.target.closest('[data-rotate]');if(rotate&&!rotate.disabled){world?.rotate(Number(rotate.dataset.rotate)*.28);return;}
   const step=e.target.closest('[data-step]');if(step&&!step.disabled){layoutStep=Math.max(1,Math.min(5,Number(step.dataset.step)));renderLayout();return;}
   const style=e.target.closest('[data-style]');if(style){nightStyle=style.dataset.style==='night';renderStyle();return;}
-  const sky=e.target.closest('[data-sky]');if(sky){skyNight=sky.dataset.sky==='night';renderSky();return;}
   const focus=e.target.closest('[data-sky-focus]');if(focus){skyFocus=Number(focus.dataset.skyFocus);renderSky();return;}
   const pair=e.target.closest('[data-pair]');if(pair){pairFocus=pair.dataset.pair;renderCompare();return;}
   const layer=e.target.closest('[data-layer]');if(layer){const id=Number(layer.dataset.layer);promptLayers.has(id)?promptLayers.delete(id):promptLayers.add(id);renderPrompt();return;}

@@ -1,10 +1,14 @@
 import { garden } from './garden.js';
 import { planSvg, annotatedPlanSvg } from './diagrams.js';
 import bruno from './assets/bruno-2025.png';
-import skyDay from './assets/sky-day.webp';
-import skyNight from './assets/sky-night.webp';
-import veloren from './assets/veloren.jpg';
-import velorenForest from './assets/veloren-extra.jpg';
+import skyCampfire from './assets/sky-campfire.jpg';
+import journeyBridge from './assets/journey-bridge.jpg';
+import shortHike from './assets/short-hike-forest.jpg';
+import skyIslands from './assets/sky-islands.jpg';
+import skyMaterials from './assets/sky-materials.jpg';
+import skyLighting from './assets/sky-lighting.jpg';
+import skyGuidance from './assets/sky-guidance.jpg';
+import gardenConcept from './assets/garden-concept.webp';
 import tokyo from './assets/littlest-tokyo.jpg';
 import ocean from './assets/three-ocean.jpg';
 import useExplore from './assets/use-explore.svg';
@@ -13,7 +17,7 @@ import useLearning from './assets/use-learning.svg';
 import useEmotion from './assets/use-emotion.svg';
 
 export const courseTitle = 'hello world-我的第一个虚拟交互世界';
-export const images = { bruno, skyDay, skyNight, veloren, velorenForest, tokyo, ocean };
+export const images = { bruno, skyIslands, gardenConcept, tokyo, ocean };
 export const groups = ['课程总览','认识交互空间','观看空间案例','确定作品主题','画清空间布局','认识游戏视觉','建立视觉规则','理解概念场景图','生成与修改概念图','成果检查与交接','走向实现'];
 const cards = (items, cls='') => `<div class="cards ${cls}">${items.map(([n,t,p])=>`<article class="card"><span class="card-index">${n}</span><h3>${t}</h3><p>${p}</p></article>`).join('')}</div>`;
 const callout = (title, text) => `<aside class="callout"><b>${title}</b><p>${text}</p></aside>`;
@@ -96,31 +100,43 @@ export const slides = [
     ${cards([['01','目标值得注意','从入口能发现主题焦点。'],['02','节点能够到达','主要路线连接关键节点。'],['03','探索有线索','重要对象清楚、不被遮挡。'],['04','结果能够看见','完成后能观察到变化。']],'plan-check-points')}
     <div class="layout-problems"><figure class="problem-diagram">${annotatedPlanSvg({problems:true})}<figcaption>问题示意：入口受阻，装饰与核心节点争抢注意。</figcaption></figure><div class="problem-notes"><span class="eyebrow">常见问题 · 怎样修改</span><article><span>01</span><div><h3>入口道路被阻挡</h3><p>把装饰物移到道路两侧，<br>保留连续通行空间。</p></div></article><article><span>02</span><div><h3>所有物件都同样醒目</h3><p>突出核心节点，<br>减少沿路干扰。</p></div></article></div></div>
   `,'此页不安排单独的课堂任务。用有问题的花园图示说明两类常见问题：入口道路被阻挡，以及所有物件都同样醒目。请学生先用手指沿路线走，再说明如何修改。'),
-  s(4,'实践：自己的空间布局图','把一句话作品概述，变成一张能够看懂、能够走通的设计图。','plan-practice',`
-    <div class="practice-reminders">${[
-      ['01','划定边界与区域','确定世界的范围，把主要区域安排在图中。'],
-      ['02','放置入口与焦点','标出从哪里进入，第一眼希望看见什么。'],
-      ['03','安排交互节点','写清装置或物件名称，以及在这里做什么。'],
-      ['04','连接主要路线','让入口与各节点能够到达，给通行与操作留出空间。'],
-      ['05','确定完成位置','完成操作后，到哪里看见或确认结果？'],
-      ['06','补充文字与图例','标注节点、阻挡和高差，让符号与颜色的含义清楚。'],
-    ].map(([n,t,p])=>`<article><span>${n}</span><h3>${t}</h3><p>${p}</p></article>`).join('')}</div>
-    <div class="practice-bottom"><div><b>完成方式</b><p>手绘、PPT 形状或绘图软件均可。</p></div><div><b>完成后自检</b><p>从入口走到各节点，再走到观察结果的位置。</p></div></div>
-  `,'提醒学生只画自己的微型世界，不必照抄花园。画完后检查边界、入口、视觉焦点、交互节点、路线、完成位置与图例。实践成果接入下一部分的视觉设计和概念图。'),
-  s(5,'游戏视觉：既表达世界，也帮助行动','场景、角色、物件、色彩、光照与提示，共同构成视觉表达。','visual-intro',`
-    <div class="visual-elements">${[['场景','建筑、地形、植物与空间'],['角色','形象、比例与环境关系'],['道具与装置','体现主题，也说明可操作性'],['色彩与光照','氛围、明暗与视觉重点'],['提示与标识','路线、目标与操作提示']].map(([a,b],i)=>`<article><span>0${i+1}</span><h3>${a}</h3><p>${b}</p></article>`).join('')}</div>
-    <div class="two-image-strip">${photo(skyDay,'光遇：云海、山峰与明亮天空','《光·遇》· 柔和空间与光照')}${photo(veloren,'Veloren：体素森林、湖面与夕阳','Veloren · 体素造型与环境色彩')}</div>
-  `,'先让学生在实际作品中指认视觉元素。下面选光遇做具体分析，而不是在这一页进入游戏下载流程。'),
-  s(5,'优秀游戏参考：不同造型，同样统一','观察整体规则，而不是只看某个漂亮物件。','game-references',`
-    <div class="reference-pair"><article>${photo(skyDay,'光遇中的明亮云海和山峰','《光·遇》· thatgamecompany；截图来源 Sky Shards 社区')}<h2>光·遇</h2><p>柔和轮廓、大片留白与明亮焦点。<br>感受：轻盈、开阔、向往。</p></article><article>${photo(velorenForest,'Veloren 的体素树木和森林空间','Veloren · 官方仓库游戏背景图片')}<h2>Veloren</h2><p>角色与环境共享体素造型语言。<br>感受：可探索、层次丰富、自然生长。</p></article></div>
-    ${callout('接下来，具体解析《光·遇》','从色彩、光照、尺度和视觉引导四个角度，读懂一个场景。')}
-  `,'两个案例用于对照视觉语言。Veloren 图片来自官方项目仓库的背景图，不把它称为概念设计稿。'),
-  s(5,'解析《光·遇》：让视觉带着人去探索','看见一个场景，也看懂它怎样影响你的感受与行动。','sky-analysis','', '点击四个解析角度，在日景与夜景之间切换。引导学生指出实际画面证据，不只说“好看”。图片在课件中直接展示，不需要下载游戏。'),
-  s(5,'同一个视觉目标，可以有不同的氛围','亮点、轮廓与明暗关系，让远处的目标依然可见。','sky-comparison',`
-    <div class="reference-pair short-captions">${photo(skyDay,'光遇日景：蓝色天空、白色云海和山顶光亮','日景：大面积蓝白，空间开阔，山顶亮点吸引视线。')}${photo(skyNight,'光遇夜景：深蓝天空、星光和明亮山顶','夜景：深蓝紫色，明暗反差加强，目标依然醒目。')}</div>
-    ${cards([['色彩','建立整体情绪','变化的是氛围，共同的是视觉秩序。'],['光照','突出重要对象','通过明暗反差，让目标容易被发现。'],['尺度','建立空间感受','云层与山体形成前后层次和远近关系。']],'three compact')}
-    <p class="source">游戏：thatgamecompany《光·遇》；图片来源：Sky Shards 社区背景图。</p>
-  `,'这两张图不包含可辨认的近景角色，不据此分析角色细节。用云层、山体、明暗关系说明空间氛围与目标。'),
+  s(4,'实践：自己的空间布局图','带着自己的主题，画一张能走通的布局图。','plan-practice',`
+    <div class="practice-brief"><span class="eyebrow">YOUR SPACE PLAN · 现在开始</span><h2>从入口出发，<br>让体验走得通。</h2><div class="practice-keywords">${[
+      ['01','从哪里进入？','入口 · 第一眼'],
+      ['02','怎样探索？','路线 · 交互节点'],
+      ['03','如何完成？','反馈 · 观察位置'],
+    ].map(([n,t,p])=>`<article><span>${n}</span><h3>${t}</h3><p>${p}</p></article>`).join('')}</div><p class="practice-short-note">别忘了：边界、节点名称与图例。</p></div>
+  `,'实践时只给关键提示，不再重复前面六项详细步骤。让学生围绕自己的主题画图，教师按需要个别提醒。'),
+  s(5,'游戏视觉是什么','玩家在世界中看到的内容，共同构成这个世界的视觉表达。','visual-intro',`
+    <blockquote class="visual-definition">玩家看到的<strong>场景、角色、物件</strong>，<br>以及<strong>色彩、光照与提示</strong>，<br>共同构成这个世界的视觉表达。</blockquote>
+    ${cards([['01','场景与角色','建筑、环境、角色形象及相互之间的尺度。'],['02','道具与装置','体现主题的物件，以及能够操作的对象。'],['03','色彩、光照与提示','整体氛围，以及目标、路线和操作信息。']],'three')}
+  `,'依据用户提供的游戏视觉 PPT 第一页，建立游戏视觉的三个主要组成部分。'),
+  s(5,'优秀作品中的不同视觉选择','每个作品选择不同规则，但作品内部维持自己的视觉关系。','game-references',`
+    <div class="game-triptych">${[
+      [skyCampfire,'光·遇','柔和轮廓与光照氛围','光遇中围绕篝火的角色、发光植物和柔和蓝色环境'],
+      [journeyBridge,'风之旅人','概括形体与有限色彩','风之旅人中暖色沙漠、概括的建筑和长桥'],
+      [shortHike,'A Short Hike','简化几何与鲜明色块','A Short Hike 的林间小屋、角色和鲜明的秋日色块'],
+    ].map(([img,t,p,alt])=>`<article>${photo(img,alt,'课件参考图 · 用户提供 PPT')}<h2>${t}</h2><p>${p}</p></article>`).join('')}</div>
+    ${callout('观察作品内部的关系','角色、环境与物件，怎样遵守同一套视觉规则？')}
+  `,'依据 PPT 第二页，用原 PPT 的三张游戏图片对照光遇、风之旅人与 A Short Hike。图片直接呈现，不提供游戏下载链接。'),
+  s(5,'视觉解析：光·遇','观察：你先看见什么？角色有多大？哪些区域让你想继续前进？','sky-analysis','', '依据 PPT 第三页的飞行与浮岛截图，依次查看造型、光照、空间层次。三个按钮用于教师切换解析角度；只根据实际画面指出证据。'),
+  s(5,'造型与材质怎样统一','','visual-materials',`
+    <div class="visual-case-layout">${photo(skyMaterials,'光遇：简化角色与大片岩石形体，表面细节服从整体轮廓','《光·遇》· 用户提供 PPT 参考图')}<div class="visual-case-notes"><article><span>01 / 造型</span><h2>轮廓的概括程度</h2><p>角色、建筑、植被的细节<br>都服务于整体阅读。</p></article><article><span>02 / 材质</span><h2>表面的表达方式</h2><p>材质可以不同，<br>粗细与细节密度需要协调。</p></article></div></div>
+  `,'依据 PPT 第四页，结合图中角色、岩壁和水面，说明轮廓概括与表面细节需要共同服务整体画面的阅读。'),
+  s(5,'色彩与光照怎样组织氛围','','visual-lighting',`
+    <div class="visual-case-layout">${photo(skyLighting,'光遇：蓝色环境中，暖色光亮突出角色和灯杖','《光·遇》· 用户提供 PPT 参考图')}<div class="visual-case-notes"><article><span>01 / 色彩</span><h2>有限的主要色彩</h2><p>环境保持共同基调，<br>局部暖色形成重点。</p></article><article><span>02 / 光照</span><h2>清楚的明暗关系</h2><p>亮部吸引注意，<br>背景帮助主体被看见。</p></article></div></div>
+  `,'依据 PPT 第五页，观察蓝色环境、角色发光轮廓与灯杖的暖色光亮，说明共同基调和局部重点的关系。'),
+  s(5,'视觉如何引导玩家行动','','visual-guidance',`
+    <div class="visual-case-layout">${photo(skyGuidance,'光遇：光束连接中央装置与上方目标，角色靠近发光装置','《光·遇》· 用户提供 PPT 参考图')}<div class="visual-case-notes"><article><span>01</span><h2>先注意哪里</h2><p>亮度和位置形成视觉焦点。</p></article><article><span>02</span><h2>为什么靠近</h2><p>目标与空间路线建立联系，<br>吸引继续探索。</p></article></div></div>
+    ${callout('课堂观察','光束是怎样吸引视线的？如果道路与目标方向相反，会发生什么？')}
+  `,'依据 PPT 第六页，观察中央装置与光束怎样形成焦点，再讨论目标方向与道路方向的关系。不要仅凭单张截图推断具体操作规则。'),
+  s(5,'可交互对象需要可辨认的视觉','','visual-interaction',`
+    ${cards([['01','与背景拉开主次','通过轮廓、对比、位置或局部亮度突出关键对象。'],['02','同类对象采用相似提示','让玩家能把在一个节点学到的操作迁移到其他节点。'],['03','操作前后体现状态变化','例如未启动、已启动与完成状态能够区分。'],['04','颜色之外还有识别线索','结合形态、符号或文字，帮助玩家确认可以怎样操作。']],'four')}
+  `,'依据 PPT 第七页，解释交互对象如何被识别、同类提示怎样帮助迁移，以及状态变化与多种识别线索的作用。'),
+  s(5,'视觉也在告诉玩家怎样行动','','visual-action',`
+    ${cards([['01','发现目标','亮度、轮廓或位置使目标更容易被注意。'],['02','读懂反馈','操作前后出现可察觉的变化。'],['03','识别交互','同类装置使用相似形态与提示。'],['04','区分主次','背景安静一些，关键节点更突出。']],'four')}
+    ${callout('想一想','去掉说明文字，玩家还能发现可以操作的对象吗？')}
+  `,'按用户最新文字替换 PPT 最后一页。用目标、反馈、交互和主次收束游戏视觉部分，下一页接让自己的世界看起来像同一个世界。'),
   s(6,'让自己的世界，看起来像同一个世界','先制定规则，再选择和生成资产。','visual-rules',`
     ${cards([['01','造型语言','圆润还是棱角？简化还是细节丰富？'],['02','材质表达','不同物件的表面处理是否协调？'],['03','色彩与光照','有没有共同的主要色彩和光照氛围？'],['04','角色与场景','比例、细节程度与风格是否匹配？']],'four')}
     ${callout('视觉引导','同类交互装置采用相似的形态与提示；背景与重要对象形成主次；操作前后有可察觉的变化。')}
