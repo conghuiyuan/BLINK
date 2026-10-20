@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360">
+  <defs><linearGradient id="room" x2="0" y2="1"><stop stop-color="#d7e6e6"/><stop offset="1" stop-color="#eef2e4"/></linearGradient></defs>
+  <rect width="600" height="360" fill="url(#room)"/><path d="M0 275 150 192h306l144 83v85H0" fill="#d2dfd8"/>
+  <rect x="69" y="43" width="205" height="132" rx="10" fill="#749696"/><rect x="79" y="53" width="185" height="112" rx="6" fill="#e5f0e5"/>
+  <path d="M115 139V79m0 60h113" fill="none" stroke="#a9c6b4" stroke-width="3"/><path d="m126 128 25-20 24 7 27-38 24 10" stroke="#739d8b" stroke-width="5" fill="none"/><g fill="#f0c86b"><circle cx="151" cy="108" r="5"/><circle cx="202" cy="77" r="5"/></g>
+  <ellipse cx="349" cy="264" rx="159" ry="57" fill="#bacfc5"/><ellipse cx="349" cy="248" rx="159" ry="57" fill="#edf3e3"/>
+  <ellipse cx="349" cy="220" rx="125" ry="38" stroke="#b0c8ba" stroke-width="2" fill="none"/><ellipse cx="349" cy="220" rx="82" ry="25" stroke="#b0c8ba" stroke-width="2" fill="none"/>
+  <path d="M349 220v-53" stroke="#a0af93" stroke-width="5"/><circle cx="349" cy="148" r="34" fill="#f2cd6c"/><circle cx="338" cy="136" r="13" fill="#f8dfa0"/>
+  <path d="M258 229v-32m168 36v-34m36 15v-35" stroke="#a0af93" stroke-width="4"/>
+  <circle cx="258" cy="188" r="18" fill="#7ca5b6"/><path d="m247 186 12-9 9 10-5 13-9-2" fill="#a9c79b"/><circle cx="426" cy="187" r="15" fill="#d69a77"/>
+  <circle cx="462" cy="161" r="21" fill="#b5abc4"/><ellipse cx="462" cy="161" rx="33" ry="8" fill="none" stroke="#d1c8d9" stroke-width="5" transform="rotate(-18 462 161)"/>
+  <g transform="translate(139 272)"><ellipse cy="34" rx="21" ry="7" fill="#6f8a6b30"/><circle cy="-30" r="12" fill="#e8c292"/><path d="m-13-16-7 42h39l-7-42" fill="#d8b674"/><path d="m-11 26-4 24m26-24 4 24" stroke="#668577" stroke-width="8"/><path d="m12-9 31-18" stroke="#e8c292" stroke-width="7" stroke-linecap="round"/></g>
+  <g fill="#f6f8ed"><circle cx="482" cy="54" r="3"/><circle cx="519" cy="106" r="4"/><path d="M414 58v17m-8-9h17" stroke="#f6f8ed" stroke-width="3"/></g>
+</svg>

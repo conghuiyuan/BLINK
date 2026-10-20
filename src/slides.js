@@ -7,7 +7,12 @@ import veloren from './assets/veloren.jpg';
 import velorenForest from './assets/veloren-extra.jpg';
 import tokyo from './assets/littlest-tokyo.jpg';
 import ocean from './assets/three-ocean.jpg';
+import useExplore from './assets/use-explore.svg';
+import useExhibition from './assets/use-exhibition.svg';
+import useLearning from './assets/use-learning.svg';
+import useEmotion from './assets/use-emotion.svg';
 
+export const courseTitle = 'hello world-我的第一个虚拟交互世界';
 export const images = { bruno, skyDay, skyNight, veloren, velorenForest, tokyo, ocean };
 export const groups = ['课程总览','认识交互空间','观看空间案例','确定作品主题','画清空间布局','认识游戏视觉','建立视觉规则','理解概念场景图','生成与修改概念图','成果检查与交接','走向实现'];
 const cards = (items, cls='') => `<div class="cards ${cls}">${items.map(([n,t,p])=>`<article class="card"><span class="card-index">${n}</span><h3>${t}</h3><p>${p}</p></article>`).join('')}</div>`;
@@ -18,15 +23,36 @@ const photo = (src,alt,caption,cls='') => `<figure class="photo ${cls}"><img src
 const s = (group,title,subtitle,kind,body,notes) => ({group,title,subtitle,kind,body,notes});
 
 export const slides = [
-  s(0,'从一个想法，到一个可以探索的世界。','虚拟交互空间 · 创作课堂','home','', '开场先问：你想邀请别人进入一个什么世界？今天的讲解聚焦设计，最后把作品交接给庄老师，继续实现。'),
+  s(0,courseTitle,'AI 首作 · 我的第一个虚拟交互世界','home','', '本页仅作为课程封面。下一页介绍 AI 首作项目的完整制作流程。'),
+  s(0,'AI首作项目的制作流程','','overview-flow',`
+    <div class="project-flow">${[
+      ['01','主题与体验','确定空间情境和核心行动'],
+      ['02','空间与视觉','布局图和概念场景图'],
+      ['03','资产准备','即梦参考图、混元3D模型'],
+      ['04','模型整理','利用模型处理器'],
+      ['05','搭建与交互','平台中的空间与操作反馈'],
+      ['06','测试与展示','修改作品并整理展示材料'],
+    ].map(([n,t,p],i)=>`<article class="project-step accent-${i%3}"><span>${n}</span><h2>${t}</h2><p>${p}</p></article>`).join('')}</div>
+  `,'介绍项目从主题与体验，到空间与视觉、资产准备、模型整理、搭建与交互，最后测试与展示的六步流程。'),
+  s(0,'项目最终形成什么','','overview-outcomes',`
+    <div class="project-outcomes">${[
+      ['01','可以体验的虚拟交互作品','能够进入和探索，包含明确的核心操作与结果反馈。'],
+      ['02','能解释设计的策划材料','说明主题、空间、视觉、交互与AI协作过程。'],
+      ['03','让别人理解作品的展示材料','用画面、演示或创作说明介绍体验。'],
+    ].map(([n,t,p],i)=>`<article class="project-outcome accent-${i}"><span>${n}</span><div><h2>${t}</h2><p>${p}</p></div></article>`).join('')}</div>
+  `,'区分整个项目最终形成的可体验作品、策划材料和展示材料。这是整个项目的成果，不只是本次设计阶段的图纸。'),
   s(1,'什么是虚拟交互空间？','从观看一个地方，到进入它，再让它回应你。','definition',`
     <blockquote>通过数字技术构建的，让人能够<strong>进入、探索</strong>，<br>并通过操作<strong>获得反馈</strong>的空间环境。</blockquote>
     ${cards([['01','虚拟','可以再现现实，也可以创造想象中的地方。'],['02','空间','有位置、方向、距离与区域，人能够在其中移动。'],['03','交互','操作引发回应：开启装置、获得信息、改变环境。']],'three')}
-    ${callout('想一想','一张花园图片、一座可以漫游的花园、一个可以修复的花园，体验有什么不同？')}
   `,'先从学生熟悉的游戏、线上展厅等体验引入，再拆解三个关键词。不要把“能进入”直接等同于“有交互”。'),
   s(1,'同一座花园，三种体验','改变的是体验者能够做什么。','garden-demo','', '依次切换三个模式。漫游模式中拖动视角，看前后遮挡如何变化；交互模式直接点击场景内的装置。三种模式是同一个 Three.js 三维场景。'),
   s(1,'一个微型世界，可以承载什么？','不必一开始就做一个大世界，先完成一段小而完整的体验。','uses',`
-    ${cards([['⌕','探索游戏','寻找、收集、修复、解谜。'],['▧','展示空间','个人作品展、校园介绍、主题展厅。'],['◎','学习体验','在场景中观察、尝试和发现。'],['♡','情绪表达','安静、奇妙，或承载个人记忆的世界。']],'four')}
+    <div class="use-gallery">${[
+      [useExplore,'探索游戏','寻找、收集、修复、解谜。','沿林间小路寻找发光物件，探索远处的入口与宝箱'],
+      [useExhibition,'展示空间','个人作品展、校园介绍、主题展厅。','虚拟展厅内的绘画、雕塑和正在参观的体验者'],
+      [useLearning,'学习体验','在场景中观察、尝试和发现。','虚拟学习空间内的太阳系模型、图表和观察者'],
+      [useEmotion,'情绪表达','安静、奇妙，或承载个人记忆的世界。','暮色中的湖边小屋、木栈道和安静停留的体验者'],
+    ].map(([img,t,p,alt],i)=>`<article class="use-card"><figure><img src="${img}" alt="${alt}"><figcaption>用途示意</figcaption></figure><div><span>0${i+1}</span><h3>${t}</h3><p>${p}</p></div></article>`).join('')}</div>
     <div class="question-band"><span>我想邀请别人进入什么地方？</span><span>希望他在里面做什么？</span><span>希望他获得什么感受？</span></div>
     ${callout('本次制作','以电脑浏览器中的体验为主。虚拟交互空间也可以通过手机或 VR 设备体验。')}
   `,'用四种用途拓宽选题，不要求每个世界同时包含所有用途。让学生先选一个明确的体验目标。'),

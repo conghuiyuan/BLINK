@@ -1,5 +1,5 @@
 import './style.css';
-import { slides, groups, images, layoutSteps, promptParts } from './slides.js';
+import { slides, groups, images, layoutSteps, promptParts, courseTitle } from './slides.js';
 import { garden } from './garden.js';
 import { planSvg } from './diagrams.js';
 import { createGarden } from './garden3d.js';
@@ -20,10 +20,10 @@ function readHash(){
 function render(){
   world?.dispose();world=null;fitObserver?.disconnect();
   const slide=slides[page];
-  document.title=`${slide.title} · 造境课堂`;
+  document.title=slide.kind==='home'?courseTitle:`${slide.title} · ${courseTitle}`;
   app.innerHTML=`<div class="app-shell ${presentation?'presenting':''}">
     <div class="mobile-shade" data-action="menu"></div>
-    <aside class="sidebar" aria-label="课程目录"><a href="#slide-1" class="brand"><span>${icon('cube')}</span><div>造境<small>WORLDMAKING LAB</small></div></a><div class="course-label">AI 首作 · 空间设计课堂</div><nav>${groups.map((g,i)=>{
+    <aside class="sidebar" aria-label="课程目录"><a href="#slide-1" class="brand"><span>${icon('cube')}</span><div class="course-brand">hello world<small>我的第一个虚拟交互世界</small></div></a><div class="course-label">AI 首作 · 空间设计课堂</div><nav>${groups.map((g,i)=>{
       const first=slides.findIndex(s=>s.group===i),count=slides.filter(s=>s.group===i).length;
       return `<button class="nav-item ${slide.group===i?'active':''}" data-page="${first}" ${slide.group===i?'aria-current="page"':''}><span class="nav-num">${i===0?'⌂':String(i).padStart(2,'0')}</span><span>${g}</span>${slide.group===i?`<small>${count} 屏</small>`:''}</button>`;
     }).join('')}</nav><div class="sidebar-bottom"><p>让一个想法，生长成世界。</p><button class="text-button" data-action="help">演示工具与快捷键 <kbd>?</kbd></button><small>BLINK · TEACHING STUDIO</small></div></aside>
@@ -42,8 +42,9 @@ function render(){
   fitObserver=new ResizeObserver(fitStage);fitObserver.observe(document.querySelector('.stage-viewport'));fitStage();
 }
 function home(){
-  return `<div class="home-kicker"><span class="eyebrow">A SMALL WORLD, A BIG IDEA</span><span>虚拟交互空间设计</span></div><div class="home-hero"><div><span class="tag">从认识，到设计，再到实现</span><h1>从一个想法，<br>到一个<span>可以探索的世界。</span></h1><p>先理解空间，再为它确定主题。<br>用布局与视觉，把想象变成清楚的设计。</p><button class="button dark large" data-page="1">开启造境之旅 ${icon('arrow')}</button></div><div class="home-world">${garden({awake:true})}<span class="home-scene-label">FIG. 01　示例世界 · 唤醒花园</span></div></div><section class="home-journey"><div class="section-heading"><h2>今天，我们要创造一个什么世界？</h2><span>一个小场景 · 一次完整体验</span></div><div class="journey">${[['01','认识空间','进入、探索与反馈',1],['02','确定主题','身份、行动与结果',3],['03','规划布局','区域、路线与节点',4],['04','设计视觉','造型、色彩与氛围',5],['05','走向实现','资产、搭建与交互',10]].map(([n,t,p,g])=>`<button data-page="${slides.findIndex(s=>s.group===g)}"><span>${n}</span><div><h3>${t}</h3><p>${p}</p></div><i>→</i></button>`).join('')}</div></section><div class="home-outcomes"><span>今天的设计成果</span><b>一句话作品概述</b><i>+</i><b>空间布局图</b><i>+</i><b>概念场景图</b><span class="home-next">交接后进入资产制作与搭建 ↗</span></div>`;
+  return `<div class="cover-page"><span class="cover-kicker">AI FIRST CREATION · AI 首作</span><div class="cover-copy"><h1><span class="cover-en">hello world</span><span class="cover-cn">我的第一个虚拟交互世界</span></h1><span class="cover-caption">虚拟交互空间创作</span></div><div class="cover-art">${garden({awake:true})}</div></div>`;
 }
+
 function fitStage(){
   const viewport=document.querySelector('.stage-viewport'),stage=document.querySelector('.stage');
   if(!viewport||!stage)return;
@@ -54,7 +55,8 @@ function fitStage(){
 function renderGarden(final=false){
   const body=document.querySelector('.slide-body');
   if(final)demoMode=2;
-  body.innerHTML=`<div class="garden-presentation"><div class="garden-view"><div class="segmented" role="group" aria-label="花园体验模式">${['01 花园图片','02 三维漫游','03 虚拟交互'].map((t,i)=>`<button data-demo="${i}" class="${demoMode===i?'active':''}" aria-pressed="${demoMode===i}">${t}</button>`).join('')}</div><div id="garden-world" class="garden-world"></div><div class="world-toolbar"><span id="world-hint">${['只能观看固定画面','按住鼠标左右拖动，观察立体空间','拖动观察；点击场景中的供水装置'][demoMode]}</span><div><button class="button outline compact" data-rotate="-1" ${demoMode===0?'disabled':''} aria-label="向左观看花园">↶ 向左看</button><button class="button outline compact" data-rotate="1" ${demoMode===0?'disabled':''} aria-label="向右观看花园">向右看 ↷</button></div></div></div><aside class="garden-explanation"><span class="eyebrow">${['LOOK · 观看','EXPLORE · 探索','INTERACT · 改变'][demoMode]}</span><h2>${['看见一个地方','换个角度，<br>看清一个空间。','你的行动，<br>带来世界的回应。'][demoMode]}</h2><p>${['固定视角里，你能看见花园的样子；还不能改变位置或操作物件。','在真正的三维场景中左右转动视角。近处与远处的物件，会产生不同的遮挡关系。','寻找并点击 A、B、C 三个供水装置。全部启动后，中央花坛会恢复生机。'][demoMode]}</p><div class="experience-ladder"><span class="on">✓ 观看</span><span class="${demoMode>=1?'on':''}">${demoMode>=1?'✓':'—'} 改变视角</span><span class="${demoMode===2?'on':''}">${demoMode===2?'✓':'—'} 操作与反馈</span></div><div class="garden-result" ${demoMode!==2?'hidden':''}><div class="pump-state" role="status"></div><button class="button outline" data-action="reset-garden">↺ 重新演示</button></div><p class="source">课堂示例 · 从观看到探索，再到交互。</p></aside></div>`;
+  const lessonDemo=slides[page].kind==='garden-demo';
+  body.innerHTML=`<div class="garden-presentation"><div class="garden-view"><div class="segmented" role="group" aria-label="花园体验模式">${['01 花园图片','02 三维漫游','03 虚拟交互'].map((t,i)=>`<button data-demo="${i}" class="${demoMode===i?'active':''}" aria-pressed="${demoMode===i}">${t}</button>`).join('')}</div><div id="garden-world" class="garden-world"></div><div class="world-toolbar"><span id="world-hint">${['只能观看固定画面','按住鼠标左右拖动，观察立体空间','拖动观察；点击场景中的供水装置'][demoMode]}</span><div><button class="button outline compact" data-rotate="-1" ${demoMode===0?'disabled':''} aria-label="向左观看花园">↶ 向左看</button><button class="button outline compact" data-rotate="1" ${demoMode===0?'disabled':''} aria-label="向右观看花园">向右看 ↷</button></div></div></div><aside class="garden-explanation"><span class="eyebrow">${['LOOK · 观看','EXPLORE · 探索','INTERACT · 改变'][demoMode]}</span><h2>${['看见一个地方','换个角度，<br>看清一个空间。',(lessonDemo?'改变观察位置，<br>改变对象与花坛。':'你的行动，<br>带来世界的回应。')][demoMode]}</h2><p>${['固定视角里，你能看见花园的样子；还不能改变位置或操作物件。','在真正的三维场景中左右转动视角。近处与远处的物件，会产生不同的遮挡关系。',(lessonDemo?'改变观察位置，并通过操作让对象和花坛发生变化。例如：启动供水装置，改变装置状态，让中央花坛恢复生机。':'寻找并点击 A、B、C 三个供水装置。全部启动后，中央花坛会恢复生机。')][demoMode]}</p><div class="experience-ladder"><span class="on">✓ 观看</span><span class="${demoMode>=1?'on':''}">${demoMode>=1?'✓':'—'} ${lessonDemo&&demoMode===2?'改变观察位置':'改变视角'}</span><span class="${demoMode===2?'on':''}">${demoMode===2?'✓':'—'} 操作与反馈</span></div><div class="garden-result" ${demoMode!==2?'hidden':''}><div class="pump-state" role="status"></div><button class="button outline" data-action="reset-garden">↺ 重新演示</button></div><p class="source">课堂示例 · 从观看到探索，再到交互。</p></aside></div>`;
   world?.dispose();
   world=createGarden(document.querySelector('#garden-world'),{mode:demoMode,active:activePumps,onActivate:set=>{activePumps=set;updateGardenStatus();}});
   updateGardenStatus();
@@ -103,10 +105,10 @@ function toast(text){const el=document.querySelector('#toast');el.textContent=te
 function printHandout(){
   document.querySelectorAll('dialog[open]').forEach(d=>d.close());
   let print=document.querySelector('#print-handout');if(!print){print=document.createElement('div');print.id='print-handout';document.body.append(print);}
-  print.innerHTML=slides.map((s,i)=>`<section class="print-slide"><small>造境 · ${String(i+1).padStart(2,'0')} / ${slides.length}</small><h1>${s.title}</h1><p>${s.subtitle}</p>${s.body||printDemo(s.kind)}<aside class="print-notes">讲课提示：${s.notes}</aside></section>`).join('');window.print();
+  print.innerHTML=slides.map((s,i)=>`<section class="print-slide"><small>${courseTitle} · ${String(i+1).padStart(2,'0')} / ${slides.length}</small><h1>${s.title}</h1><p>${s.subtitle}</p>${s.body||printDemo(s.kind)}<aside class="print-notes">讲课提示：${s.notes}</aside></section>`).join('');window.print();
 }
 function printDemo(kind){
-  if(kind==='home')return '<p>认识空间 → 确定主题 → 规划布局 → 设计视觉 → 走向实现</p>'+garden({awake:true});
+  if(kind==='home')return garden({awake:true});
   if(kind==='layout-demo')return planSvg(5)+layoutSteps.map(([t,p],i)=>`<p>${i+1}. ${t}：${p}</p>`).join('');
   if(kind==='sky-analysis')return `<img src="${images.skyDay}" alt="光遇日景"><img src="${images.skyNight}" alt="光遇夜景">`+skyAnalyses.map(([t,h,p])=>`<p><b>${t}：${h}</b>${p}</p>`).join('');
   if(kind==='prompt-demo')return promptParts.map(([t,p])=>`<p><b>${t}</b>：${p}</p>`).join('');
