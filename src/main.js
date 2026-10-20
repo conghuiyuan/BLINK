@@ -15,7 +15,7 @@ function readHash(){
   const m=location.hash.match(/^#slide-(\d+)$/);
   if(m)return Math.max(0,Math.min(slides.length-1,Number(m[1])-1));
   const old=location.hash.match(/^#chapter-(\d+)$/);
-  return old?Math.max(0,slides.findIndex(s=>s.group===Math.min(10,Number(old[1])))):0;
+  return old?Math.max(0,slides.findIndex(s=>s.group===Math.min(groups.length-1,Number(old[1])))):0;
 }
 function render(){
   world?.dispose();world=null;fitObserver?.disconnect();
@@ -33,7 +33,7 @@ function render(){
     <div id="toast" role="status" aria-live="polite"></div>
     <dialog id="notes-dialog"><button class="dialog-close" data-action="close-dialog" aria-label="关闭提示">×</button><span class="eyebrow">PRESENTER NOTES · 讲课提示</span><h2>${slide.title}</h2><p>${slide.notes}</p></dialog>
     <dialog id="help-dialog"><button class="dialog-close" data-action="close-dialog" aria-label="关闭说明">×</button><span class="eyebrow">PRESENTER TOOLS</span><h2>把注意力留给课堂</h2><div class="shortcut"><span>上 / 下一屏</span><span><kbd>←</kbd> <kbd>→</kbd></span></div><div class="shortcut"><span>投屏 / 全屏</span><span><kbd>P</kbd> <kbd>F</kbd></span></div><div class="shortcut"><span>讲课提示 / 目录</span><span><kbd>N</kbd> <kbd>M</kbd></span></div><div class="shortcut"><span>课程总览</span><kbd>Home</kbd></div><p>全部内容逐屏呈现，无需下滑。3D 演示使用鼠标拖动或场景下方按钮改变视角；按方向键继续翻页。</p><button class="button dark" data-action="print">打印整份讲义</button><p class="source">图像来源与许可说明见项目中的 src/assets/SOURCES.md。课件中的“图片”是本地素材，只有案例访问按钮需要联网。</p></dialog>`;
-  if(slide.kind==='garden-demo'||slide.kind==='final-demo')renderGarden(slide.kind==='final-demo');
+  if(slide.kind==='garden-demo')renderGarden();
   if(slide.kind==='layout-demo')renderLayout();
   if(slide.kind==='style-demo')renderStyle();
   if(slide.kind==='sky-analysis')renderSky();
@@ -80,12 +80,12 @@ function renderSky(){
   const [name,title,text]=skyAnalyses[skyFocus];
   document.querySelector('.slide-body').innerHTML=`<div class="sky-presentation"><div class="sky-picture"><div class="sky-image-wrap"><img src="${images.skyIslands}" alt="光遇：前景飞行角色、中景山体与远处浮岛，来自参考 PPT">${skyFocus===0?'<span class="focus-ring" style="left:48%;top:62%"><b>角色与环境的形体</b></span>':skyFocus===1?'<span class="focus-ring" style="left:71%;top:30%"><b>山体受光面</b></span>':'<span class="depth-label near">前景 · 角色</span><span class="depth-label middle">中景 · 主岛</span><span class="depth-label far">远景 · 浮岛</span>'}</div><p class="source">《光·遇》· 用户提供 PPT 参考图</p></div><aside><div class="analysis-tabs" role="group" aria-label="光遇视觉解析角度">${skyAnalyses.map(([n],i)=>`<button data-sky-focus="${i}" class="${skyFocus===i?'active':''}" aria-pressed="${skyFocus===i}">0${i+1}　${n}</button>`).join('')}</div><span class="eyebrow">${name} · VISUAL ANALYSIS</span><h2>${title}</h2><p>${text}</p></aside></div>`;
 }
-const pairPositions={entrance:[[50,87],[50,79]],focus:[[50,52],[50,45]],A:[[24,52],[23,39]],B:[[76,52],[78,39]],C:[[50,23],[50,21]]};
+const pairPositions={entrance:[[50,87],[50,63]],focus:[[50,52],[50,38]],A:[[24,52],[28,33]],B:[[76,52],[73,33]],C:[[50,23],[50,17]]};
 function conceptArtwork(focus=null){
   const names={entrance:'入口',focus:'中央花坛',A:'装置 A',B:'装置 B',C:'装置 C'};
   const position=focus?pairPositions[focus][1]:null;
   const x=position?.[0]*1536/100,y=position?.[1]*1024/100;
-  return `<svg class="concept-artwork" viewBox="0 0 1536 1024" role="img" aria-label="唤醒花园概念场景图：入口、中央花坛、左右和后方的三个供水装置，以及清楚的步道、植物和日光"><image href="${images.gardenConcept}" width="1536" height="1024"/>${focus?`<g data-pair-marker="${focus}"><circle cx="${x}" cy="${y}" r="${focus==='focus'?90:65}" fill="#efd881" fill-opacity=".08" stroke="#ffffed" stroke-width="7"/><circle cx="${x}" cy="${y}" r="${focus==='focus'?90:65}" fill="none" stroke="#9b7d35" stroke-width="3"/><rect x="${x-78}" y="${y+76}" width="156" height="42" rx="12" fill="#f5f8ef" fill-opacity=".95"/><text x="${x}" y="${y+105}" text-anchor="middle" fill="#365941" font-size="27" font-family="sans-serif">${names[focus]}</text></g>`:''}</svg>`;
+  return `<svg class="concept-artwork" viewBox="0 0 1536 1024" role="img" aria-label="唤醒花园浮岛式三维概念场景图：完整浮岛、入口、中央花坛、左右和后方的三个供水装置，以及清楚的步道与空间边界"><image href="${images.gardenConcept}" width="1536" height="1024"/>${focus?`<g data-pair-marker="${focus}"><circle cx="${x}" cy="${y}" r="${focus==='focus'?90:65}" fill="#efd881" fill-opacity=".08" stroke="#ffffed" stroke-width="7"/><circle cx="${x}" cy="${y}" r="${focus==='focus'?90:65}" fill="none" stroke="#9b7d35" stroke-width="3"/><rect x="${x-78}" y="${y+76}" width="156" height="42" rx="12" fill="#f5f8ef" fill-opacity=".95"/><text x="${x}" y="${y+105}" text-anchor="middle" fill="#365941" font-size="27" font-family="sans-serif">${names[focus]}</text></g>`:''}</svg>`;
 }
 function renderCompare(){
   const names={entrance:'入口',focus:'中央花坛',A:'装置 A',B:'装置 B',C:'装置 C'},positions=pairPositions[pairFocus];

@@ -28,7 +28,7 @@
 
 - 文件：`garden-concept.webp`。
 - 根据本课件的空间设计，使用 OpenAI 图像生成工具制作，用于布局图与概念图的对照教学。不是现有游戏截图，也不是三维场景的实时渲染。
-- 保留南侧入口、中央花坛、左侧 A、右侧 B、后方 C 三个供水装置与相通步道。背景植物、材质与日光表达概念阶段的视觉氛围。
+- 本版将参考花园改为完整的浮岛式三维世界概念图，能看到完整空间边界、岩石底部与天空。保留南侧入口、中央花坛、左侧 A、右侧 B、后方 C 三个供水装置与相通步道，三个节点位置与布局图对应。
 - 原始生成图保留在工作区的 `generated_images` 中；网页使用 WebP 格式以减少离线文件体积。
 
 ## 历史素材：光·遇（本版未引用）
@@ -50,7 +50,7 @@
 - 原始图像：<https://raw.githubusercontent.com/veloren/veloren/master/assets/voxygen/background/bg_10.jpg>
 - 官方项目及其原始许可信息：<https://github.com/veloren/veloren>
 
-## three.js 案例
+## 历史素材：three.js 案例（本版未引用）
 
 - `littlest-tokyo.jpg`：three.js 示例 `webgl_animation_keyframes` 的预览图。模型作品 **Littlest Tokyo**，作者 **Glen Fox**，官方示例标注 **CC Attribution**。
 - 图像：<https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/screenshots/webgl_animation_keyframes.jpg>

@@ -9,16 +9,14 @@ import skyMaterials from './assets/sky-materials.jpg';
 import skyLighting from './assets/sky-lighting.jpg';
 import skyGuidance from './assets/sky-guidance.jpg';
 import gardenConcept from './assets/garden-concept.webp';
-import tokyo from './assets/littlest-tokyo.jpg';
-import ocean from './assets/three-ocean.jpg';
 import useExplore from './assets/use-explore.svg';
 import useExhibition from './assets/use-exhibition.svg';
 import useLearning from './assets/use-learning.svg';
 import useEmotion from './assets/use-emotion.svg';
 
 export const courseTitle = 'hello world-我的第一个虚拟交互世界';
-export const images = { bruno, skyIslands, gardenConcept, tokyo, ocean };
-export const groups = ['课程总览','认识交互空间','观看空间案例','确定作品主题','画清空间布局','认识游戏视觉','建立视觉规则','理解概念场景图','生成与修改概念图','成果检查与交接','走向实现'];
+export const images = { bruno, skyIslands, gardenConcept };
+export const groups = ['课程总览','认识交互空间','观看空间案例','确定作品主题','画清空间布局','认识游戏视觉','建立视觉规则','理解概念场景图','生成与修改概念图','成果检查与交接'];
 const cards = (items, cls='') => `<div class="cards ${cls}">${items.map(([n,t,p])=>`<article class="card"><span class="card-index">${n}</span><h3>${t}</h3><p>${p}</p></article>`).join('')}</div>`;
 const callout = (title, text) => `<aside class="callout"><b>${title}</b><p>${text}</p></aside>`;
 const task = (title,text) => `<aside class="class-task"><span>✎ 课堂任务</span><div><h3>${title}</h3><p>${text}</p></div></aside>`;
@@ -130,9 +128,6 @@ export const slides = [
     <div class="visual-case-layout">${photo(skyGuidance,'光遇：光束连接中央装置与上方目标，角色靠近发光装置','《光·遇》· 用户提供 PPT 参考图')}<div class="visual-case-notes"><article><span>01</span><h2>先注意哪里</h2><p>亮度和位置形成视觉焦点。</p></article><article><span>02</span><h2>为什么靠近</h2><p>目标与空间路线建立联系，<br>吸引继续探索。</p></article></div></div>
     ${callout('课堂观察','光束是怎样吸引视线的？如果道路与目标方向相反，会发生什么？')}
   `,'依据 PPT 第六页，观察中央装置与光束怎样形成焦点，再讨论目标方向与道路方向的关系。不要仅凭单张截图推断具体操作规则。'),
-  s(5,'可交互对象需要可辨认的视觉','','visual-interaction',`
-    ${cards([['01','与背景拉开主次','通过轮廓、对比、位置或局部亮度突出关键对象。'],['02','同类对象采用相似提示','让玩家能把在一个节点学到的操作迁移到其他节点。'],['03','操作前后体现状态变化','例如未启动、已启动与完成状态能够区分。'],['04','颜色之外还有识别线索','结合形态、符号或文字，帮助玩家确认可以怎样操作。']],'four')}
-  `,'依据 PPT 第七页，解释交互对象如何被识别、同类提示怎样帮助迁移，以及状态变化与多种识别线索的作用。'),
   s(5,'视觉也在告诉玩家怎样行动','','visual-action',`
     ${cards([['01','发现目标','亮度、轮廓或位置使目标更容易被注意。'],['02','读懂反馈','操作前后出现可察觉的变化。'],['03','识别交互','同类装置使用相似形态与提示。'],['04','区分主次','背景安静一些，关键节点更突出。']],'four')}
     ${callout('想一想','去掉说明文字，玩家还能发现可以操作的对象吗？')}
@@ -147,30 +142,25 @@ export const slides = [
     <div class="split"><div class="stack"><div class="feature-quote">它是空间样貌与氛围的设计依据，<br>也是后续资产制作与搭建的共同参照。</div>${rows([['视觉风格','整体造型、材质和细节程度。'],['色彩与光照','主要颜色、氛围和视觉重点。'],['核心区域','标志性物件与主要交互节点。'],['空间关系','前后层次、大小比例与可通行路径。']])}</div><div class="illustration">${garden({awake:true,labels:true})}<span class="source">唤醒花园 · 课堂概念示意</span></div></div>
   `,'概念图应帮助团队做设计决定，并不是生成一张与布局无关的漂亮图片。课堂 SVG 是示意，不冒充 AI 生图或游戏截图。'),
   s(7,'布局图与概念图，讲的是同一个世界','画法不同，入口、主要区域和节点应该一一对应。','concept-compare','', '依次指认南侧入口、中央花坛、左侧 A、右侧 B 和后方 C。可以使用对应项按钮，同时突出两张图上的同一对象。'),
-  s(7,'从 three.js 案例，观察场景设计','先读懂已经实现的画面，再反推自己的概念图需要说明什么。','three-references',`
-    <div class="reference-pair three-ref"><article>${photo(tokyo,'Littlest Tokyo：微缩街区、屋顶招财猫、街道与电车','three.js · webgl_animation_keyframes；模型 Glen Fox')}<h2>Littlest Tokyo</h2><p>微缩街区，用明确边界控制规模；建筑、招牌和交通物件形成统一细节语言。</p><span class="tag">观察：范围 · 标志物 · 尺度</span></article><article>${photo(ocean,'three.js 海面示例：水面、天空与远处地平线','three.js · webgl_shaders_ocean')}<h2>Ocean / Sky</h2><p>通过水面、天空与光照，建立一个连贯的环境氛围。视觉并不只靠复杂模型。</p><span class="tag">观察：色彩 · 光照 · 氛围</span></article></div>
-    ${callout('注意图像的用途','这里展示的是已实现的 three.js 案例截图，作为概念设计的观察参考，不是原作者的概念设计稿。')}
-  `,'说明 three.js 是网页三维技术与案例平台。选择案例里的设计规律，避免让学生误认为要复制同等复杂的成品。'),
-  s(7,'把优秀案例，转化成自己的设计问题','拿走设计方法，不把完整案例当成自己的设计。','three-reading',`
-    <div class="split"><div class="reference-large">${photo(tokyo,'Littlest Tokyo 的建筑、屋顶标志物、街道和电车','案例：Littlest Tokyo · three.js；模型：Glen Fox')}</div><div class="stack">${rows([['看边界','微型场景到哪里结束？如何控制资产数量？'],['看焦点','第一眼注意到什么？为什么它比背景更醒目？'],['看层次','前景、中景、后景怎样形成空间感？'],['看统一','不同物件怎样共享比例、材质与色彩规则？']])}<a class="button outline" href="https://threejs.org/examples/#webgl_animation_keyframes" target="_blank" rel="noopener noreferrer">查看 three.js 原始案例 ↗</a></div></div>
-  `,'这一页可以在课件中直接讲，也可以视网络情况打开原始 three.js 案例。Littlest Tokyo 模型作者为 Glen Fox。'),
+  s(7,'案例如何作为参考','把看到的设计方法，转化为自己作品的设计选择。','case-reference',`
+    <div class="case-reference-link"><div><span class="eyebrow">REFERENCE · 打开视野</span><h2>看优秀案例，也带着自己的问题。</h2></div><a class="button dark large" href="https://threejs.org/" target="_blank" rel="noopener noreferrer">浏览 Three.js 优秀案例 ↗</a></div>
+    ${cards([['01','参考空间组织','观察场景范围、入口、焦点与路线，想一想自己的微型世界怎样安排。'],['02','参考视觉规则','观察造型、材质、色彩与光照，提炼适合自己主题的风格关键词。'],['03','参考行动与反馈','观察怎样发现目标、辨认操作对象，以及操作后出现了什么变化。'],['04','转化成自己的选择','挑选一种方法，说清它解决了什么问题，再结合自己的主题与布局调整。']],'four')}
+    ${callout('记录参考','保留作品名称、作者或链接，并说明自己参考了哪种设计方法。')}
+  `,'只保留 Three.js 网站入口，不再展开 Littlest Tokyo 或 Ocean 的具体案例。浏览时带着空间组织、视觉规则与交互反馈三个问题，最后转化成自己的设计选择，并记录参考来源。'),
+  s(8,'生图前需要说明的内容','把已有的布局与视觉决定，说清楚。','prompt-preparation',`
+    ${cards([['01','空间与视角','是什么地方，从哪里、以什么高度看。'],['02','区域与位置关系','入口、视觉焦点和交互对象分别在哪里。'],['03','视觉规则','造型、材质、主要色彩与光照。'],['04','范围与限制','道路可读、关键节点可辨认，避免增加无关大物件。']],'four')}
+  `,'按用户提供的生图前说明图片组织四项内容：空间与视角、区域与位置关系、视觉规则、范围与限制。图片仅作为文字内容参考，沿用本课件绿色风格。'),
   s(8,'根据布局，组织清楚的生图需求','先说明空间关系，再加入视觉规则。','prompt-demo','', '逐个打开提示词信息层。强调左右、前后、入口视角等来自布局设计，不能完全交给生成工具随机决定。复制后可在你选定的外部生图工具演示。'),
   s(8,'生成以后，回到设计检查','概念图需要符合设计，而不是让布局追着随机图像改变。','concept-check',`
     ${cards([['01','节点完整','入口、中央花坛与三个装置有没有缺失？'],['02','关系正确','左右、前后与主要区域是否符合布局？'],['03','视觉统一','形体、材质、颜色与光照是否遵守规则？'],['04','行动清楚','道路是否可通行？对象有没有被遮挡？']],'four')}
     ${callout('指出具体问题，再修改','“保留整体风格，移开左侧植物，让供水装置和步道清楚可见。”同时检查是否多出大型建筑或不必要的物件。')}
-    ${task('生成、选择并修改一张概念图','补上主要区域和节点标注，记录工具或参考来源。')}
   `,'要求每次修改有具体目标。注意排除多余大型物件，以及生成模型常见的道路断裂、装置数量不对等问题。'),
   s(9,'三项成果，描述同一个世界','把作品概述、布局图与概念场景图放在一起检查。','handoff',`
     ${cards([['01','一句话作品概述','说明体验者是谁、进入哪里、做什么、最后发生什么。'],['02','空间布局图','标清范围、入口、区域、路线、交互节点与结束位置。'],['03','概念场景图','表现统一的造型、色彩、光照和氛围，附简短说明与来源。']],'three deliverables')}
     <div class="question-band"><span>是否围绕同一个主题？</span><span>区域与节点是否对应？</span><span>是否已经能据此开始搭建？</span></div>
     ${callout('交接给庄老师','下一步进入资产生成、模型处理与平台搭建。保留原图，以及主要区域与交互说明。')}
   `,'让学生用图纸说明入口、行动和反馈。交接时不要只交漂亮图片，还要保留主题与空间设计依据。'),
-  s(10,'设计之后，走向实现','这部分由庄老师继续带领：把蓝图变成可以运行的空间。','implementation',`
-    <div class="implementation-flow">${[['01','资产制作','根据布局与概念图，拆出建筑、植物、道具、角色。'],['02','模型处理','检查比例、材质、命名与模型复杂度。'],['03','场景搭建','还原空间关系，放置资产、相机与光照。'],['04','交互实现','连接触发条件、操作行为与结果反馈。'],['05','体验测试','检查通行、遮挡、操作与完成状态。']].map(([n,t,p])=>`<article><span>${n}</span><h3>${t}</h3><p>${p}</p></article>`).join('')}</div>
-    ${callout('我们今天的设计，为实现提供依据','布局图决定“放在哪里”，概念图决定“长什么样”，作品概述决定“做什么、发生什么”。')}
-    <p class="source">具体制作工具与搭建方案，按庄老师后续课程安排推进。</p>
-  `,'只交代完整创作链路，不在本部分展开模型处理或编程细节。强调今天的三项成果怎样服务后续实现。'),
-  s(10,'最后，让世界真正回应一次行动','从一个想法，到一个可以观看、探索、改变的小世界。','final-demo','', '用同一个花园的可运行三维演示收束课堂。点击装置，指出触发、状态与反馈，再回到三项设计成果的价值。'),
+
 ];
 
 export const layoutSteps = [['画出空间范围','确定花园边界，控制好微型世界的规模。'],['放置入口与视觉焦点','从入口能够看见中央花坛。'],['安排交互节点','把供水装置 A、B、C 放在左、右及后方。'],['连接主要路线','入口、花坛和各装置之间都可以通行。'],['补充标注与图例','节点名称、结束位置、边界、方向、阻挡与高差。']];
