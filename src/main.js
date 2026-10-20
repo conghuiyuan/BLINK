@@ -23,7 +23,7 @@ function render(){
   document.title=slide.kind==='home'?courseTitle:`${slide.title} · ${courseTitle}`;
   app.innerHTML=`<div class="app-shell ${presentation?'presenting':''}">
     <div class="mobile-shade" data-action="menu"></div>
-    <aside class="sidebar" aria-label="课程目录"><a href="#slide-1" class="brand"><span>${icon('cube')}</span><div class="course-brand">hello world<small>我的第一个虚拟交互世界</small></div></a><div class="course-label">AI 首作 · 空间设计课堂</div><nav>${groups.map((g,i)=>{
+    <aside class="sidebar" aria-label="课程目录"><a href="#slide-1" class="brand"><span>${icon('cube')}</span><div class="course-brand">hello world<small>WORLDMAKING LAB</small></div></a><div class="course-label">AI 首作 · 空间设计课堂</div><nav>${groups.map((g,i)=>{
       const first=slides.findIndex(s=>s.group===i),count=slides.filter(s=>s.group===i).length;
       return `<button class="nav-item ${slide.group===i?'active':''}" data-page="${first}" ${slide.group===i?'aria-current="page"':''}><span class="nav-num">${i===0?'⌂':String(i).padStart(2,'0')}</span><span>${g}</span>${slide.group===i?`<small>${count} 屏</small>`:''}</button>`;
     }).join('')}</nav><div class="sidebar-bottom"><p>让一个想法，生长成世界。</p><button class="text-button" data-action="help">演示工具与快捷键 <kbd>?</kbd></button><small>BLINK · TEACHING STUDIO</small></div></aside>
@@ -42,7 +42,7 @@ function render(){
   fitObserver=new ResizeObserver(fitStage);fitObserver.observe(document.querySelector('.stage-viewport'));fitStage();
 }
 function home(){
-  return `<div class="cover-page"><span class="cover-kicker">AI FIRST CREATION · AI 首作</span><div class="cover-copy"><h1><span class="cover-en">hello world</span><span class="cover-cn">我的第一个虚拟交互世界</span></h1><span class="cover-caption">虚拟交互空间创作</span></div><div class="cover-art">${garden({awake:true})}</div></div>`;
+  return `<div class="home-kicker"><span class="eyebrow">A SMALL WORLD, A BIG IDEA</span><span>虚拟交互空间设计</span></div><div class="home-hero"><div><span class="tag">hello world · 我的第一个虚拟交互世界</span><h1>从一个想法，<br>到一个<span>可以探索的世界。</span></h1><p>先理解空间，再为它确定主题。<br>用布局与视觉，把想象变成清楚的设计。</p><button class="button dark large" data-page="1">开启创作之旅 ${icon('arrow')}</button></div><div class="home-world">${garden({awake:true})}<span class="home-scene-label">FIG. 01　示例世界 · 唤醒花园</span></div></div>`;
 }
 
 function fitStage(){

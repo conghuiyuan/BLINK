@@ -8,11 +8,12 @@
 
 ## Bruno Simon
 
-- 文件：`bruno-2019.png`
-- 作品：Bruno Simon，Folio 2019。
-- 原始图像：<https://raw.githubusercontent.com/brunosimon/folio-2019/master/static/social/share-1200x630.png>
-- 作者项目：<https://github.com/brunosimon/folio-2019>
-- 课件注明图示为 2019 版，链接打开作者现行网站，不把历史图示当成当前网站的准确布局。
+- 当前使用文件：`bruno-2025.png`，与用户指定的图1为同一画面，取自官方高清原图。
+- 作品：Bruno Simon，Folio 2025。
+- 原始图像：<https://bruno-simon.com/social/share-image.png?cb=a>
+- 作者项目：<https://github.com/brunosimon/folio-2025>
+- 案例分析页的整体图和道路、灯光局部均来自同一张官方预览图，局部由浏览器裁切展示。入口教学、信息区域与操作反馈需结合原站演示，不据此预览图推断具体操作。
+- 历史素材 `bruno-2019.png` 保留在仓库中，本版课件未引用；来源：<https://raw.githubusercontent.com/brunosimon/folio-2019/master/static/social/share-1200x630.png>。
 
 ## 光·遇（Sky: Children of the Light）
 

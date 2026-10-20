@@ -1,6 +1,6 @@
 import { garden } from './garden.js';
 import { planSvg } from './diagrams.js';
-import bruno from './assets/bruno-2019.png';
+import bruno from './assets/bruno-2025.png';
 import skyDay from './assets/sky-day.webp';
 import skyNight from './assets/sky-night.webp';
 import veloren from './assets/veloren.jpg';
@@ -21,6 +21,14 @@ const task = (title,text) => `<aside class="class-task"><span>✎ 课堂任务</
 const rows = (items) => `<div class="info-rows">${items.map(([a,b])=>`<div><b>${a}</b><p>${b}</p></div>`).join('')}</div>`;
 const photo = (src,alt,caption,cls='') => `<figure class="photo ${cls}"><img src="${src}" alt="${alt}"><figcaption>${caption}</figcaption></figure>`;
 const s = (group,title,subtitle,kind,body,notes) => ({group,title,subtitle,kind,body,notes});
+const processSketch = (i) => `<svg viewBox="0 0 150 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${[
+  '<circle cx="30" cy="32" r="16"/><path d="M25 32h10m-5-5v10M49 32h22m-5-5 5 5-5 5"/><rect x="82" y="14" width="50" height="36" rx="7"/><path d="m91 39 10-13 10 10 12-8"/>',
+  '<rect x="10" y="10" width="53" height="43" rx="6"/><path d="M23 19v24h27M23 33h14V21h15"/><path d="M74 32h12m-4-4 4 4-4 4"/><rect x="97" y="10" width="43" height="43" rx="6"/><path d="m102 42 10-16 10 9 9-14 5 21z"/>',
+  '<path d="M24 16h23v32H16V24zM16 24h8v-8M22 40l6-9 6 5 6-8"/><path d="M58 32h22m-5-5 5 5-5 5"/><path d="m108 12 22 12v24l-22 12-22-12V24zM86 24l22 12 22-12m-22 12v24"/>',
+  '<path d="m22 15 19 11v21L22 58 3 47V26zM3 26l19 11 19-11m-19 11v21M54 31h19m-5-5 5 5-5 5"/><rect x="87" y="10" width="53" height="44" rx="5"/><path d="M99 22h29M99 32h20M99 42h25m-25-22 3 2-3 2"/>',
+  '<rect x="8" y="9" width="67" height="46" rx="6"/><path d="M18 45h47M23 43V30l12-7 12 7v13m-12-20v19M55 25h8v17"/><path d="M88 32h16m-5-5 5 5-5 5"/><circle cx="128" cy="32" r="15"/><path d="m120 32 5 5 10-11"/>',
+  '<rect x="7" y="9" width="70" height="43" rx="5"/><path d="m34 21 17 10-17 10zM29 59h25"/><path d="M91 18h45m-45 14h45m-45 14h30M84 16l2 2 4-5m-6 17 2 2 4-5m-6 17 2 2 4-5"/>',
+][i]}</svg>`;
 
 export const slides = [
   s(0,courseTitle,'AI 首作 · 我的第一个虚拟交互世界','home','', '本页仅作为课程封面。下一页介绍 AI 首作项目的完整制作流程。'),
@@ -32,18 +40,19 @@ export const slides = [
       ['04','模型整理','利用模型处理器'],
       ['05','搭建与交互','平台中的空间与操作反馈'],
       ['06','测试与展示','修改作品并整理展示材料'],
-    ].map(([n,t,p],i)=>`<article class="project-step accent-${i%3}"><span>${n}</span><h2>${t}</h2><p>${p}</p></article>`).join('')}</div>
+    ].map(([n,t,p],i)=>`<article class="project-step"><div class="step-top"><span>${n}</span>${processSketch(i)}</div><h2>${t}</h2><p>${p}</p><span class="step-output">${['一句话作品概述','空间布局图 + 概念场景图','参考素材 + 3D 模型','可用于搭建的模型','可进入、可操作的世界','完成作品 + 展示材料'][i]}</span></article>`).join('')}</div>
   `,'介绍项目从主题与体验，到空间与视觉、资产准备、模型整理、搭建与交互，最后测试与展示的六步流程。'),
   s(0,'项目最终形成什么','','overview-outcomes',`
     <div class="project-outcomes">${[
       ['01','可以体验的虚拟交互作品','能够进入和探索，包含明确的核心操作与结果反馈。'],
       ['02','能解释设计的策划材料','说明主题、空间、视觉、交互与AI协作过程。'],
       ['03','让别人理解作品的展示材料','用画面、演示或创作说明介绍体验。'],
-    ].map(([n,t,p],i)=>`<article class="project-outcome accent-${i}"><span>${n}</span><div><h2>${t}</h2><p>${p}</p></div></article>`).join('')}</div>
+    ].map(([n,t,p],i)=>`<article class="project-outcome"><div class="outcome-top"><span>${n}</span><span>${['体验作品','策划材料','展示材料'][i]}</span></div><div class="outcome-preview">${i===0?garden({awake:true}):i===1?planSvg(5):`<div class="showcase-preview"><div class="showcase-screen">${garden({awake:true})}<span>作品演示</span></div><div class="showcase-lines"><i></i><i></i><i></i></div><span>画面 · 演示 · 创作说明</span></div>`}</div><h2>${t}</h2><p>${p}</p><div class="outcome-tags">${['进入 · 探索 · 操作 · 反馈','主题 · 空间 · 视觉 · AI 协作','看见作品 · 理解体验'][i]}</div></article>`).join('')}</div>
   `,'区分整个项目最终形成的可体验作品、策划材料和展示材料。这是整个项目的成果，不只是本次设计阶段的图纸。'),
   s(1,'什么是虚拟交互空间？','从观看一个地方，到进入它，再让它回应你。','definition',`
     <blockquote>通过数字技术构建的，让人能够<strong>进入、探索</strong>，<br>并通过操作<strong>获得反馈</strong>的空间环境。</blockquote>
     ${cards([['01','虚拟','可以再现现实，也可以创造想象中的地方。'],['02','空间','有位置、方向、距离与区域，人能够在其中移动。'],['03','交互','操作引发回应：开启装置、获得信息、改变环境。']],'three')}
+    ${callout('想一想','一张花园图片、一座可以漫游的花园、一个可以修复的花园，体验有什么不同？')}
   `,'先从学生熟悉的游戏、线上展厅等体验引入，再拆解三个关键词。不要把“能进入”直接等同于“有交互”。'),
   s(1,'同一座花园，三种体验','改变的是体验者能够做什么。','garden-demo','', '依次切换三个模式。漫游模式中拖动视角，看前后遮挡如何变化；交互模式直接点击场景内的装置。三种模式是同一个 Three.js 三维场景。'),
   s(1,'一个微型世界，可以承载什么？','不必一开始就做一个大世界，先完成一段小而完整的体验。','uses',`
@@ -56,15 +65,20 @@ export const slides = [
     <div class="question-band"><span>我想邀请别人进入什么地方？</span><span>希望他在里面做什么？</span><span>希望他获得什么感受？</span></div>
     ${callout('本次制作','以电脑浏览器中的体验为主。虚拟交互空间也可以通过手机或 VR 设备体验。')}
   `,'用四种用途拓宽选题，不要求每个世界同时包含所有用途。让学生先选一个明确的体验目标。'),
-  s(2,'把个人网站，变成可以探索的世界','Bruno Simon · 3D 交互作品集（图示为 2019 版）','bruno-intro',`
-    <div class="split wide-media">${photo(bruno,'Bruno Simon 2019 作品集：橙色地面、简化树木与红色小车','作品与图片：Bruno Simon · folio-2019 官方项目')}
-    <div class="stack"><span class="tag">空间化的信息表达</span><h2>开着小车，<br>认识一个创作者。</h2><p class="body-copy">访问者操控一辆小车，在三维场地中探索个人介绍与作品。浏览信息，成为一次有方向、有发现的空间体验。</p>${rows([['进入方式','从“点击网页菜单”，变成“驾驶小车探索”。'],['内容组织','把不同的信息，放到不同的空间区域。'],['操作反馈','移动、碰撞与物理反应，让行动被看见。']])}<a class="button dark" href="https://bruno-simon.com/" target="_blank" rel="noopener noreferrer">打开 Bruno Simon 作品 ↗</a><p class="source">链接进入作者现行作品；界面可能与 2019 版图示不同。</p></div></div>
-  `,'先介绍这个网站做了什么，再打开现行作品进行观看。图示来自作者的 2019 版，不把历史版本截图当成现行网站的准确地图。'),
+  s(2,'把个人网站，变成可以探索的世界','Bruno Simon · 3D 交互作品集','bruno-intro',`
+    <div class="split wide-media">${photo(bruno,'Bruno Simon 作品集：桥边的红色越野车、发光灯柱与风格化场景','作品与图片：Bruno Simon · Folio 2025 官方预览图')}
+    <div class="stack"><span class="tag">空间化的信息表达</span><h2>开着小车，<br>认识一个创作者。</h2><p class="body-copy">访问者操控一辆小车，在三维场地中探索个人介绍与作品。浏览信息，成为一次有方向、有发现的空间体验。</p>${rows([['进入方式','从“点击网页菜单”，变成“驾驶小车探索”。'],['内容组织','把不同的信息，放到不同的空间区域。'],['操作反馈','移动、碰撞与物理反应，让行动被看见。']])}<a class="button dark" href="https://bruno-simon.com/" target="_blank" rel="noopener noreferrer">打开 Bruno Simon 作品 ↗</a><p class="source">图示为作者官方作品预览，点击按钮进入网站体验。</p></div></div>
+  `,'先介绍这个网站做了什么，再打开现行作品进行观看。使用用户指定画面的官方高清原图，图示为 Folio 2025 的作品预览。'),
   s(2,'看 Bruno Simon 时，重点看什么？','先观察体验，再讨论技术。','bruno-focus',`
-    <div class="split"><div class="observation-map"><span class="eyebrow">INFORMATION → SPACE</span><div class="map-zone z-start">进入<br><small>认识操作方式</small></div><div class="map-zone z-about">个人介绍</div><div class="map-zone z-project">作品区域</div><div class="map-zone z-contact">联系信息</div><svg viewBox="0 0 660 440" aria-hidden="true"><path d="M160 325 240 210 420 130M240 210 470 330" stroke="#a2b18a" stroke-width="3" stroke-dasharray="8 7" fill="none"/></svg><span class="diagram-credit">信息组织示意，非原站布局截图</span></div><div class="stack">${rows([['01 / 空间组织','个人介绍与作品怎样成为不同的地点？地点之间怎样连接？'],['02 / 视觉引导','哪里更醒目？道路、文字与物件如何提示可以去的方向？'],['03 / 操作与反馈','小车移动、靠近和碰撞时，哪些反馈让你理解自己的行动？']])}${callout('带回自己的设计','不是复制“小车”，而是学习如何让内容、空间和行动形成联系。')}</div></div>
-  `,'控制案例观看时间。请学生各找一个空间组织、一个视觉引导和一个操作反馈的例子，不需要完整玩遍网站。'),
-  s(3,'先给世界一个清楚的主题','一个小场景 + 一个核心行动 + 一次完整反馈。','theme',`
-    <div class="sentence">体验者作为 <em>某个身份</em>，进入 <em>一个地方</em>，<br>通过 <em>核心行动</em>，最终 <em>获得结果</em>。</div>
+    <div class="bruno-reading"><div class="bruno-evidence"><figure class="bruno-overview"><img src="${bruno}" alt="Bruno Simon 官方场景预览"><figcaption>先看整体：道路、地标与可接近的物件</figcaption></figure><div class="bruno-details"><figure><div class="bruno-crop bridge"><img src="${bruno}" alt="同一预览图局部：木桥与道路"></div><figcaption>道路把视线引向另一处空间</figcaption></figure><figure><div class="bruno-crop lamp"><img src="${bruno}" alt="同一预览图局部：发光灯柱"></div><figcaption>明亮物件形成视觉提示</figcaption></figure></div><p class="source">整体与局部均来自同一官方预览图。<br>入口教学、信息区域和操作反馈，结合原站演示观察。</p></div><div class="bruno-points">${[
+      ['入口怎样教会你操作','最开始看见什么，怎样知道可以驾驶和交互。'],
+      ['空间怎样组织信息','原来的个人介绍、作品和联系信息放在哪里。'],
+      ['视觉怎样提示去向','道路、标识、地标和物件怎样吸引你靠近。'],
+      ['操作怎样带来反馈','碰到物件、进入区域或触发操作时，有什么变化。'],
+    ].map(([t,p],i)=>`<article><span>0${i+1}</span><div><h2>${t}</h2><p>${p}</p></div></article>`).join('')}<div class="bruno-takeaway">把内容安排成地点，让行动带来可感知的回应。</div></div></div>
+  `,'先用图片分析道路与灯光，再打开作品，依次观察入口教学、信息组织、视觉去向和操作反馈。局部图片为同一预览图的裁切，不是不同区域的截图。'),
+  s(3,'先给世界一个清楚的主题','','theme',`
+    <div class="theme-statement"><span class="eyebrow">一句话作品概述</span><div class="sentence">体验者作为<span class="sentence-blank"><em>________</em><small>身份</small></span>，进入<span class="sentence-blank"><em>________</em><small>空间</small></span>，<br>通过<span class="sentence-blank"><em>________</em><small>核心行动</small></span>，最终<span class="sentence-blank"><em>________</em><small>结果反馈</small></span>。</div><p class="sentence-purpose">用一句话说清作品的核心体验，让布局、视觉与交互围绕同一个目标展开。</p></div>
     ${cards([['01','清楚的主题','别人能说出，这个世界在讲什么。'],['02','可以探索的空间','区域之间有连接，有值得去的地方。'],['03','至少一条完整交互','能完成一次“行动 → 变化 → 结果”的体验。']],'three')}
     ${task('写出一句话作品概述','先填清身份、空间、行动和结果，再给作品取名。')}
   `,'帮助学生缩小范围。“创造一个奇幻王国”太大，可以改成“修复一座失去光亮的小灯塔”。'),
