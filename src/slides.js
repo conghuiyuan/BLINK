@@ -1,5 +1,5 @@
 import { garden } from './garden.js';
-import { planSvg } from './diagrams.js';
+import { planSvg, annotatedPlanSvg } from './diagrams.js';
 import bruno from './assets/bruno-2025.png';
 import skyDay from './assets/sky-day.webp';
 import skyNight from './assets/sky-night.webp';
@@ -42,13 +42,6 @@ export const slides = [
       ['06','测试与展示','修改作品并整理展示材料'],
     ].map(([n,t,p],i)=>`<article class="project-step"><div class="step-top"><span>${n}</span>${processSketch(i)}</div><h2>${t}</h2><p>${p}</p><span class="step-output">${['一句话作品概述','空间布局图 + 概念场景图','参考素材 + 3D 模型','可用于搭建的模型','可进入、可操作的世界','完成作品 + 展示材料'][i]}</span></article>`).join('')}</div>
   `,'介绍项目从主题与体验，到空间与视觉、资产准备、模型整理、搭建与交互，最后测试与展示的六步流程。'),
-  s(0,'项目最终形成什么','','overview-outcomes',`
-    <div class="project-outcomes">${[
-      ['01','可以体验的虚拟交互作品','能够进入和探索，包含明确的核心操作与结果反馈。'],
-      ['02','能解释设计的策划材料','说明主题、空间、视觉、交互与AI协作过程。'],
-      ['03','让别人理解作品的展示材料','用画面、演示或创作说明介绍体验。'],
-    ].map(([n,t,p],i)=>`<article class="project-outcome"><div class="outcome-top"><span>${n}</span><span>${['体验作品','策划材料','展示材料'][i]}</span></div><div class="outcome-preview">${i===0?garden({awake:true}):i===1?planSvg(5):`<div class="showcase-preview"><div class="showcase-screen">${garden({awake:true})}<span>作品演示</span></div><div class="showcase-lines"><i></i><i></i><i></i></div><span>画面 · 演示 · 创作说明</span></div>`}</div><h2>${t}</h2><p>${p}</p><div class="outcome-tags">${['进入 · 探索 · 操作 · 反馈','主题 · 空间 · 视觉 · AI 协作','看见作品 · 理解体验'][i]}</div></article>`).join('')}</div>
-  `,'区分整个项目最终形成的可体验作品、策划材料和展示材料。这是整个项目的成果，不只是本次设计阶段的图纸。'),
   s(1,'什么是虚拟交互空间？','从观看一个地方，到进入它，再让它回应你。','definition',`
     <blockquote>通过数字技术构建的，让人能够<strong>进入、探索</strong>，<br>并通过操作<strong>获得反馈</strong>的空间环境。</blockquote>
     ${cards([['01','虚拟','可以再现现实，也可以创造想象中的地方。'],['02','空间','有位置、方向、距离与区域，人能够在其中移动。'],['03','交互','操作引发回应：开启装置、获得信息、改变环境。']],'three')}
@@ -70,13 +63,13 @@ export const slides = [
     <div class="stack"><span class="tag">空间化的信息表达</span><h2>开着小车，<br>认识一个创作者。</h2><p class="body-copy">访问者操控一辆小车，在三维场地中探索个人介绍与作品。浏览信息，成为一次有方向、有发现的空间体验。</p>${rows([['进入方式','从“点击网页菜单”，变成“驾驶小车探索”。'],['内容组织','把不同的信息，放到不同的空间区域。'],['操作反馈','移动、碰撞与物理反应，让行动被看见。']])}<a class="button dark" href="https://bruno-simon.com/" target="_blank" rel="noopener noreferrer">打开 Bruno Simon 作品 ↗</a><p class="source">图示为作者官方作品预览，点击按钮进入网站体验。</p></div></div>
   `,'先介绍这个网站做了什么，再打开现行作品进行观看。使用用户指定画面的官方高清原图，图示为 Folio 2025 的作品预览。'),
   s(2,'看 Bruno Simon 时，重点看什么？','先观察体验，再讨论技术。','bruno-focus',`
-    <div class="bruno-reading"><div class="bruno-evidence"><figure class="bruno-overview"><img src="${bruno}" alt="Bruno Simon 官方场景预览"><figcaption>先看整体：道路、地标与可接近的物件</figcaption></figure><div class="bruno-details"><figure><div class="bruno-crop bridge"><img src="${bruno}" alt="同一预览图局部：木桥与道路"></div><figcaption>道路把视线引向另一处空间</figcaption></figure><figure><div class="bruno-crop lamp"><img src="${bruno}" alt="同一预览图局部：发光灯柱"></div><figcaption>明亮物件形成视觉提示</figcaption></figure></div><p class="source">整体与局部均来自同一官方预览图。<br>入口教学、信息区域和操作反馈，结合原站演示观察。</p></div><div class="bruno-points">${[
+    <div class="bruno-points">${[
       ['入口怎样教会你操作','最开始看见什么，怎样知道可以驾驶和交互。'],
       ['空间怎样组织信息','原来的个人介绍、作品和联系信息放在哪里。'],
       ['视觉怎样提示去向','道路、标识、地标和物件怎样吸引你靠近。'],
       ['操作怎样带来反馈','碰到物件、进入区域或触发操作时，有什么变化。'],
-    ].map(([t,p],i)=>`<article><span>0${i+1}</span><div><h2>${t}</h2><p>${p}</p></div></article>`).join('')}<div class="bruno-takeaway">把内容安排成地点，让行动带来可感知的回应。</div></div></div>
-  `,'先用图片分析道路与灯光，再打开作品，依次观察入口教学、信息组织、视觉去向和操作反馈。局部图片为同一预览图的裁切，不是不同区域的截图。'),
+    ].map(([t,p],i)=>`<article><span>0${i+1}</span><div><h2>${t}</h2><p>${p}</p></div></article>`).join('')}</div><div class="bruno-takeaway">把内容安排成地点，让行动带来可感知的回应。</div>
+  `,'结合上一页的作品演示，依次观察入口教学、信息组织、视觉去向和操作反馈。此页只保留四项文字观看重点。'),
   s(3,'先给世界一个清楚的主题','','theme',`
     <div class="theme-statement"><span class="eyebrow">一句话作品概述</span><div class="sentence">体验者作为<span class="sentence-blank"><em>________</em><small>身份</small></span>，进入<span class="sentence-blank"><em>________</em><small>空间</small></span>，<br>通过<span class="sentence-blank"><em>________</em><small>核心行动</small></span>，最终<span class="sentence-blank"><em>________</em><small>结果反馈</small></span>。</div><p class="sentence-purpose">用一句话说清作品的核心体验，让布局、视觉与交互围绕同一个目标展开。</p></div>
     ${cards([['01','清楚的主题','别人能说出，这个世界在讲什么。'],['02','可以探索的空间','区域之间有连接，有值得去的地方。'],['03','至少一条完整交互','能完成一次“行动 → 变化 → 结果”的体验。']],'three')}
@@ -85,14 +78,35 @@ export const slides = [
   s(3,'贯穿课堂的示例：唤醒花园','从主题出发，让身份、行动与反馈相互支持。','garden-theme',`
     <div class="split"><div class="illustration">${garden({awake:true})}</div><div class="stack"><p class="feature-quote">体验者作为温室修复者，进入缺水的花园，通过寻找并启动三个供水装置，使中央花坛恢复生机。</p>${rows([['空间情境','缺水的花园'],['体验者身份','温室修复者'],['核心行动','寻找并启动三个供水装置'],['结果反馈','中央花坛恢复生机'],['预期感受','探索的好奇、完成修复的成就感']])}</div></div>
   `,'追问：花园为什么需要被修复？玩家凭什么知道完成了？把抽象感受落实为可见的场景变化。'),
-  s(4,'空间布局图：先把关系画清楚','从上方组织空间，说明区域在哪里、怎样连接、怎样探索。','plan-intro',`
-    <div class="split"><div class="stack">${rows([['入口','从哪里进入？'],['视觉焦点','进入后先看见什么？'],['主要路线','往哪里走？'],['交互节点','在哪里停留和操作？'],['结束位置','最后在哪里观察结果？']])}${callout('画清楚，比画漂亮更重要','可以手绘，也可以用 PPT 形状或绘图软件。')}</div><div class="illustration plan">${planSvg(5)}<span class="source">唤醒花园 · 俯视布局示意</span></div></div>
-  `,'让学生先指出入口，再用手指走到各装置，最后回到花坛。这里不要求精细透视与材质。'),
+  s(4,'空间布局图是什么，为什么要画？','先从上方，把世界中的空间关系组织清楚。','plan-intro',`
+    <blockquote class="plan-definition">空间布局图，是从上方组织空间的设计图，<br>用来说明<strong>各区域放在哪里、怎样连接</strong>，<br>以及<strong>体验者怎样探索</strong>。</blockquote>
+    <div class="plan-purpose-label"><span class="eyebrow">WHY PLAN · 为什么先画布局</span></div>
+    ${cards([['01','把想法变成空间','把主题中的入口、主要区域与交互对象，安排到具体的位置。'],['02','提前检查体验','在制作模型前，发现路线断裂、目标不清楚或节点被遮挡的问题。'],['03','为后续搭建提供依据','让区域、路线和节点有共同参照，后续资产与场景搭建围绕同一设计展开。']],'three')}
+  `,'先解释它是一张组织空间关系的俯视设计图，再说明为什么在做模型和搭建场景前画。下一页用唤醒花园具体读图。'),
+  s(4,'布局图里，需要标清什么？','以“唤醒花园”为例：让入口、节点、路线与完成位置相互对应。','plan-reading',`
+    <div class="plan-reading-layout"><figure class="annotated-plan-wrap">${annotatedPlanSvg()}<figcaption><span><i class="legend-boundary"></i>空间边界</span><span><i class="legend-path"></i>可通行步道</span><span><i class="legend-node"></i>供水装置</span><span><i class="legend-focus"></i>主题焦点</span></figcaption></figure><div class="plan-reading-points">${[
+      ['01','入口与第一眼','从南侧入口进入，先看见中央花坛，认识“唤醒花园”的主题。'],
+      ['02','步道与交互节点','沿 A / B / C 步道自由探索，寻找并启动三个供水装置，顺序不限。'],
+      ['03','完成位置与结果','全部启动后，回到中央花坛，观察花园恢复生机的变化。'],
+      ['04','区域与空间限制','标清边界、植物区、阻挡、高差和图例。本例步道平坦、保持通畅。'],
+    ].map(([n,t,p])=>`<article><span>${n}</span><div><h3>${t}</h3><p>${p}</p></div></article>`).join('')}</div></div>
+  `,'先指入口和中央花坛，再沿步道分别走向左 A、右 B、后方 C，说明三个装置可以自由探索，不是必须按字母顺序完成。最后回到花坛检查结果。图中 A/B/C 的位置与后续布局步骤、概念图和三维花园一致。'),
   s(4,'一层一层，画出探索的路线','用“唤醒花园”示范布局的五个步骤。','layout-demo','', '从边界开始，依次加入入口与花坛、交互节点、主要路线，最后补充标注。可用步骤按钮来回对照。'),
-  s(4,'让别人不听解释，也能走一遍','检查的不是图有多漂亮，而是体验能不能成立。','plan-check',`
-    ${cards([['01','目标值得注意','进入空间时，能发现一个视觉目标。'],['02','节点能够到达','主要路线连接关键节点，操作位置留有空间。'],['03','探索有线索','重要对象不被遮挡，自由探索也有引导。'],['04','结果能够看见','完成操作以后，体验者能观察到变化。']],'four')}
-    ${task('完成布局图，请同桌模拟角色走一遍','不听作者解释，能不能看懂从哪里进入、去哪里、做什么？')}
-  `,'实践时重点巡视路线断裂、入口不清楚、交互对象被遮挡三类问题。根据同桌反馈调整布局。'),
+  s(4,'让别人不听解释，也能走一遍','用手指模拟角色，从入口沿路线走一遍，检查体验是否成立。','plan-check',`
+    ${cards([['01','目标值得注意','从入口能发现主题焦点。'],['02','节点能够到达','主要路线连接关键节点。'],['03','探索有线索','重要对象清楚、不被遮挡。'],['04','结果能够看见','完成后能观察到变化。']],'plan-check-points')}
+    <div class="layout-problems"><figure class="problem-diagram">${annotatedPlanSvg({problems:true})}<figcaption>问题示意：入口受阻，装饰与核心节点争抢注意。</figcaption></figure><div class="problem-notes"><span class="eyebrow">常见问题 · 怎样修改</span><article><span>01</span><div><h3>入口道路被阻挡</h3><p>把装饰物移到道路两侧，<br>保留连续通行空间。</p></div></article><article><span>02</span><div><h3>所有物件都同样醒目</h3><p>突出核心节点，<br>减少沿路干扰。</p></div></article></div></div>
+  `,'此页不安排单独的课堂任务。用有问题的花园图示说明两类常见问题：入口道路被阻挡，以及所有物件都同样醒目。请学生先用手指沿路线走，再说明如何修改。'),
+  s(4,'实践：自己的空间布局图','把一句话作品概述，变成一张能够看懂、能够走通的设计图。','plan-practice',`
+    <div class="practice-reminders">${[
+      ['01','划定边界与区域','确定世界的范围，把主要区域安排在图中。'],
+      ['02','放置入口与焦点','标出从哪里进入，第一眼希望看见什么。'],
+      ['03','安排交互节点','写清装置或物件名称，以及在这里做什么。'],
+      ['04','连接主要路线','让入口与各节点能够到达，给通行与操作留出空间。'],
+      ['05','确定完成位置','完成操作后，到哪里看见或确认结果？'],
+      ['06','补充文字与图例','标注节点、阻挡和高差，让符号与颜色的含义清楚。'],
+    ].map(([n,t,p])=>`<article><span>${n}</span><h3>${t}</h3><p>${p}</p></article>`).join('')}</div>
+    <div class="practice-bottom"><div><b>完成方式</b><p>手绘、PPT 形状或绘图软件均可。</p></div><div><b>完成后自检</b><p>从入口走到各节点，再走到观察结果的位置。</p></div></div>
+  `,'提醒学生只画自己的微型世界，不必照抄花园。画完后检查边界、入口、视觉焦点、交互节点、路线、完成位置与图例。实践成果接入下一部分的视觉设计和概念图。'),
   s(5,'游戏视觉：既表达世界，也帮助行动','场景、角色、物件、色彩、光照与提示，共同构成视觉表达。','visual-intro',`
     <div class="visual-elements">${[['场景','建筑、地形、植物与空间'],['角色','形象、比例与环境关系'],['道具与装置','体现主题，也说明可操作性'],['色彩与光照','氛围、明暗与视觉重点'],['提示与标识','路线、目标与操作提示']].map(([a,b],i)=>`<article><span>0${i+1}</span><h3>${a}</h3><p>${b}</p></article>`).join('')}</div>
     <div class="two-image-strip">${photo(skyDay,'光遇：云海、山峰与明亮天空','《光·遇》· 柔和空间与光照')}${photo(veloren,'Veloren：体素森林、湖面与夕阳','Veloren · 体素造型与环境色彩')}</div>

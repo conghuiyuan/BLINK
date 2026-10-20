@@ -12,7 +12,7 @@
 - 作品：Bruno Simon，Folio 2025。
 - 原始图像：<https://bruno-simon.com/social/share-image.png?cb=a>
 - 作者项目：<https://github.com/brunosimon/folio-2025>
-- 案例分析页的整体图和道路、灯光局部均来自同一张官方预览图，局部由浏览器裁切展示。入口教学、信息区域与操作反馈需结合原站演示，不据此预览图推断具体操作。
+- 案例介绍页使用官方预览图；观看重点页仅保留文字。入口教学、信息区域、视觉引导与操作反馈需结合原站演示，不据此预览图推断具体操作。
 - 历史素材 `bruno-2019.png` 保留在仓库中，本版课件未引用；来源：<https://raw.githubusercontent.com/brunosimon/folio-2019/master/static/social/share-1200x630.png>。
 
 ## 光·遇（Sky: Children of the Light）
